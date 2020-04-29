@@ -1,7 +1,8 @@
-package com.tinko.unizaexamwatchdog
+package com.tinko.unizaexamwatchdog.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.tinko.unizaexamwatchdog.R
 
 class MainActivity : AppCompatActivity() {
 
