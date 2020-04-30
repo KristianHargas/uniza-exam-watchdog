@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.tinko.unizaexamwatchdog.databinding.FragmentLoginBinding
 
 import com.tinko.unizaexamwatchdog.R
+import com.tinko.unizaexamwatchdog.repository.AuthenticationState
 import com.tinko.unizaexamwatchdog.repository.UserRepository
 import com.tinko.unizaexamwatchdog.viewmodel.LoginViewModel
 
@@ -26,10 +27,7 @@ class LoginFragment : Fragment() {
             .get(LoginViewModel::class.java)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.i("LoginFragment", "onCreateView");
 
         // Inflate the layout for this fragment
@@ -39,15 +37,13 @@ class LoginFragment : Fragment() {
         binding.loginViewModel = loginViewModel
 
         loginViewModel.authenticated.observe(viewLifecycleOwner, Observer {
-            if (it == UserRepository.AuthState.AUTHENTICATED) {
+            Log.i("LoginFragment", it.toString())
+
+            if (it == AuthenticationState.AUTHENTICATED) {
                 Log.i("LoginFragment", "loggedIn")
 
                 findNavController().navigate(R.id.action_loginFragment_to_mainScreenFragment)
             }
-
-            // val message = when (it) {
-            //    UserRepository.AuthState.AUTHENTICATED -> "Authenticated"
-            //}
         })
 
         return binding.root

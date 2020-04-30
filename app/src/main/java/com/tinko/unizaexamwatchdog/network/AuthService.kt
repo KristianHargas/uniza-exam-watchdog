@@ -22,6 +22,8 @@ interface AuthService {
 }
 
 private val service: AuthService by lazy {
+    Log.i("AuthService", "creating auth service")
+
     val retrofit = Retrofit.Builder()
         .baseUrl(AUTH_SERVICE_URL)
         .addConverterFactory(GsonConverterFactory.create())

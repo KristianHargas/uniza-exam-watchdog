@@ -11,53 +11,54 @@ import com.tinko.unizaexamwatchdog.network.getAuthService
 import com.tinko.unizaexamwatchdog.util.SingletonHolder
 import retrofit2.Response
 
+enum class AuthenticationState {
+    UNAUTHENTICATED,
+    AUTHENTICATING,
+    AUTHENTICATED,
+    INVALID_AUTHENTICATION,
+    NETWORK_ERROR
+}
+
 class UserRepository private constructor(application: Application) {
-    enum class AuthState {
-        UNAUTHENTICATED,
-        AUTHENTICATING,
-        AUTHENTICATED,
-        INVALID_AUTHENTICATION,
-        NETWORK_ERROR
-    }
+    private val authService: AuthService by lazy { getAuthService() }
 
-    private val authService: AuthService = getAuthService()
-
-    private val _authState = MutableLiveData<AuthState>()
-    val authState : LiveData<AuthState>
+    private val _authState = MutableLiveData<AuthenticationState>()
+    val authState : LiveData<AuthenticationState>
         get() = _authState
 
     init {
         Log.i("UserRepository", "init")
-        _authState.value = AuthState.UNAUTHENTICATED
+        _authState.value = AuthenticationState.UNAUTHENTICATED
     }
 
     suspend fun login(name: String, password: String) {
         try {
-            _authState.value = AuthState.AUTHENTICATING
+            _authState.value = AuthenticationState.AUTHENTICATING
+            // calling authentication service
             val res: Response<AuthRes> = authService.login(name, password)
 
             // Server always returns 200
             if (res.code() == 200) {
                 val loggedSuccessful = res.body()?.logged ?: throw Exception("Missing response body!")
-
                 // Correct credentials
                 if (loggedSuccessful) {
-                    // returns string of all cookies
-                    val cookies = res.raw().header("Set-Cookie") ?: ""
+                    // returns list of all cookies
+                    val cookies = res.raw().headers("Set-Cookie")
 
-                    if (cookies.contains(SESSION_COOKIE_NAME)) {
-                        val start = cookies.indexOf(SESSION_COOKIE_NAME)
-                        val sessionCookie = cookies.subSequence(start, cookies.indexOf(';', start))
+                    var sessionCookieStr: String = cookies.firstOrNull {
+                        it.contains(SESSION_COOKIE_NAME)
+                    } ?: throw Exception("Missing session cookie!")
 
-                        Log.i("UserRepository", cookies)
-                        Log.i("UserRepository", sessionCookie.toString())
-                    } else {
-                        throw Exception("Missing session cookie!")
-                    }
+                    val start = sessionCookieStr.indexOf(SESSION_COOKIE_NAME)
+                    // extracted cookie which will be saved along with name and password in encrypted shared prefs
+                    val sessionCookie = sessionCookieStr.substring(start, sessionCookieStr.indexOf(';', start))
 
-                    _authState.value = AuthState.AUTHENTICATED
+                    // save
+                    Log.i("UserRepository", sessionCookie)
+
+                    _authState.value = AuthenticationState.AUTHENTICATED
                 } else {
-                    _authState.value = AuthState.INVALID_AUTHENTICATION
+                    _authState.value = AuthenticationState.INVALID_AUTHENTICATION
                 }
             } else {
                 // Should not happen, but what if..
@@ -65,7 +66,7 @@ class UserRepository private constructor(application: Application) {
             }
         } catch (e: Throwable) {
             Log.e("UserRepository", e.message)
-            _authState.value = AuthState.NETWORK_ERROR
+            _authState.value = AuthenticationState.NETWORK_ERROR
         }
     }
 
