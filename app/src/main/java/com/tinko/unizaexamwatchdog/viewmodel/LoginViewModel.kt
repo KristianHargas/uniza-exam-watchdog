@@ -31,7 +31,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         val enteredPassword: String = password.value ?: ""
 
         viewModelScope.launch {
-            // userRepo.login(enteredName, enteredPassword)
+            userRepo.login(enteredName, enteredPassword)
         }
     }
 

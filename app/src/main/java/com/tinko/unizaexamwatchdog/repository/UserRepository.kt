@@ -8,6 +8,7 @@ import com.tinko.unizaexamwatchdog.network.AuthRes
 import com.tinko.unizaexamwatchdog.network.AuthService
 import com.tinko.unizaexamwatchdog.network.SESSION_COOKIE_NAME
 import com.tinko.unizaexamwatchdog.network.getAuthService
+import com.tinko.unizaexamwatchdog.preferences.UserPreferences
 import com.tinko.unizaexamwatchdog.util.SingletonHolder
 import retrofit2.Response
 
@@ -20,7 +21,9 @@ enum class AuthenticationState {
 }
 
 class UserRepository private constructor(application: Application) {
+
     private val authService: AuthService by lazy { getAuthService() }
+    private val preferences: UserPreferences = UserPreferences(application)
 
     private val _authState = MutableLiveData<AuthenticationState>()
     val authState : LiveData<AuthenticationState>
@@ -28,14 +31,18 @@ class UserRepository private constructor(application: Application) {
 
     init {
         Log.i("UserRepository", "init")
-        _authState.value = AuthenticationState.UNAUTHENTICATED
+
+        _authState.value = when(preferences.getUsername()) {
+            null -> AuthenticationState.UNAUTHENTICATED
+            else -> AuthenticationState.AUTHENTICATED
+        }
     }
 
-    suspend fun login(name: String, password: String) {
+    suspend fun login(username: String, password: String) {
         try {
             _authState.value = AuthenticationState.AUTHENTICATING
             // calling authentication service
-            val res: Response<AuthRes> = authService.login(name, password)
+            val res: Response<AuthRes> = authService.login(username, password)
 
             // Server always returns 200
             if (res.code() == 200) {
@@ -55,6 +62,7 @@ class UserRepository private constructor(application: Application) {
 
                     // save
                     Log.i("UserRepository", sessionCookie)
+                    preferences.saveUserData(username, password, sessionCookie)
 
                     _authState.value = AuthenticationState.AUTHENTICATED
                 } else {
