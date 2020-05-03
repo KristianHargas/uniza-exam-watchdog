@@ -1,5 +1,6 @@
 package com.tinko.unizaexamwatchdog.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -26,6 +27,16 @@ class MainScreenFragment : Fragment() {
         }
 
         return root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.i("MainScreenFragment", "onAttach");
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.i("MainScreenFragment", "onCreate");
     }
 
     override fun onStart() {

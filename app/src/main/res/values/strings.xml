@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Uniza Exam Watchdog</string>
+    <string name="login_screen_title">Prihlásenie</string>
 </resources>

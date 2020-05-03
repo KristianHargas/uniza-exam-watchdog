@@ -12,19 +12,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="16dp"
         tools:context=".ui.LoginFragment">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/loginNameFieldLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
             android:hint="Používateľské meno"
             app:layout_constraintBottom_toTopOf="@+id/loginPasswordFieldLayout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_max="300dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginNameField"
@@ -37,14 +39,17 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/loginPasswordFieldLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:hint="Heslo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.4">
+            app:layout_constraintVertical_bias="0.45"
+            app:layout_constraintWidth_max="300dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginPasswordField"
@@ -58,8 +63,10 @@
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:onClick="@{() -> loginViewModel.authenticate()}"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
             android:paddingHorizontal="48dp"
             android:paddingVertical="16dp"
             android:text="Prihlásiť"

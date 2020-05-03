@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.tinko.unizaexamwatchdog.repository.AuthenticationState
 import com.tinko.unizaexamwatchdog.repository.UserRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
@@ -30,7 +31,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         val enteredPassword: String = password.value ?: ""
 
         viewModelScope.launch {
-            userRepo.login(enteredName, enteredPassword)
+            // userRepo.login(enteredName, enteredPassword)
         }
     }
 
