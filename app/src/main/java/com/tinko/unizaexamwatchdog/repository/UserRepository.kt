@@ -38,6 +38,10 @@ class UserRepository private constructor(application: Application) {
         }
     }
 
+    fun loginCancelled() {
+        _authState.value = AuthenticationState.UNAUTHENTICATED
+    }
+
     suspend fun login(username: String, password: String) {
         try {
             _authState.value = AuthenticationState.AUTHENTICATING

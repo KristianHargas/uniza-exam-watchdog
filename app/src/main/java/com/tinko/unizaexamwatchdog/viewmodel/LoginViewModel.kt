@@ -13,11 +13,14 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     private val userRepo: UserRepository = UserRepository.getInstance(application)
 
-    // two-way data binfing with edit texts
+    // two-way data binding with edit texts
     val name = MutableLiveData<String>()
     val password = MutableLiveData<String>()
 
     val authenticated: LiveData<AuthenticationState> = userRepo.authState
+    val authenticating: LiveData<Boolean> = Transformations.map(authenticated) {
+        it == AuthenticationState.AUTHENTICATING
+    }
 
     init {
         name.value = ""
@@ -33,6 +36,10 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             userRepo.login(enteredName, enteredPassword)
         }
+    }
+
+    fun loginCancelled () {
+        userRepo.loginCancelled()
     }
 
     override fun onCleared() {

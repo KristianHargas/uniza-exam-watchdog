@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
         <variable
             name="loginViewModel"
             type="com.tinko.unizaexamwatchdog.viewmodel.LoginViewModel" />
@@ -14,6 +15,24 @@
         android:layout_height="match_parent"
         tools:context=".ui.LoginFragment">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/progressBarGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="4dp" />
+
+        <ProgressBar
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:indeterminate="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/progressBarGuideline"
+            android:visibility="@{loginViewModel.authenticating ? View.VISIBLE : View.GONE}"/>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/loginNameFieldLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -22,7 +41,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
-            android:hint="Používateľské meno"
+            android:hint="@string/username"
             app:layout_constraintBottom_toTopOf="@+id/loginPasswordFieldLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:hint="Heslo"
+            android:hint="@string/password"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -69,10 +88,42 @@
             android:layout_marginEnd="16dp"
             android:paddingHorizontal="48dp"
             android:paddingVertical="16dp"
-            android:text="Prihlásiť"
+            android:text="@string/login"
+            android:enabled="@{!loginViewModel.name.empty &amp;&amp; !loginViewModel.password.empty &amp;&amp; !loginViewModel.authenticating}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loginPasswordFieldLayout" />
+
+        <TextView
+            android:id="@+id/login_info_general_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/secondaryTextColor"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:text="@string/login_info_general"
+            app:layout_constraintBottom_toTopOf="@+id/loginNameFieldLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="300dp" />
+
+        <TextView
+            android:id="@+id/login_info_security_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:gravity="center_horizontal"
+            android:text="@string/login_info_security"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginButton"
+            app:layout_constraintWidth_max="300dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

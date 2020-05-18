@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Uniza Exam Watchdog</string>
     <string name="login_screen_title">Prihlásenie</string>
+    <string name="username">Používateľské meno</string>
+    <string name="password">Heslo</string>
+    <string name="login">Prihlásiť</string>
+    <string name="login_info_general">Zadajte prihlasovacie údaje, aké používate na serveri <u>https://vzdelavanie.uniza.sk</u>.</string>
+    <string name="login_info_security">Vaše prihlasovacie údaje budú uložené iba lokálne na zariadení, a to v zašifrovanej podobe. Budú použité len za účelom získavania informácií týkajúcich sa zapísaných predmetov a termínov skúšok.</string>
+    <string name="network_error_message">Chyba siete alebo servera</string>
+    <string name="invalid_authentication_message">Nesprávne prihlasovacie údaje</string>
 </resources>
