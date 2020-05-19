@@ -25,7 +25,7 @@ class UserPreferences(application: Application) {
 
     fun getUsername(): String? = sharedPreferences.getString(USERNAME_KEY, null)
     fun getPassword(): String? = sharedPreferences.getString(PASSWORD_KEY, null)
-    fun getSessionId(): String? = sharedPreferences.getString(SESSION_COOKIE_KEY, null)
+    fun getSessionCookie(): String? = sharedPreferences.getString(SESSION_COOKIE_KEY, null)
 
     companion object {
         private const val FILE_NAME = "user_preferences"

@@ -56,7 +56,6 @@ class LoginFragment : Fragment() {
         }
 
         loginViewModel.authenticated.observe(viewLifecycleOwner, Observer {
-
             if (it == AuthenticationState.AUTHENTICATED) {
                 findNavController().popBackStack()
             } else if (it == AuthenticationState.INVALID_AUTHENTICATION) {

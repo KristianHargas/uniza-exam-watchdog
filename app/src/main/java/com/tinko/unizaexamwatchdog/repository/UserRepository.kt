@@ -38,6 +38,8 @@ class UserRepository private constructor(application: Application) {
         }
     }
 
+    fun getSessionCookie(): String? = preferences.getSessionCookie()
+
     fun loginCancelled() {
         _authState.value = AuthenticationState.UNAUTHENTICATED
     }
