@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
         <variable
             name="mainViewModel"
             type="com.tinko.unizaexamwatchdog.viewmodel.MainViewModel" />
@@ -14,11 +15,37 @@
         android:layout_height="match_parent"
         tools:context=".ui.MainScreenFragment">
 
-        <TextView
-            android:id="@+id/main_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/subjects_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Main screen fragment" />
+            android:layout_height="0dp"
+            android:paddingVertical="8dp"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/main_bottom_menu"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="4"
+            tools:listitem="@layout/subject_item" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/main_bottom_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/main_menu"
+            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/loading_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="@{mainViewModel.allSubjects.empty ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

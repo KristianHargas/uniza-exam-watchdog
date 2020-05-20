@@ -28,7 +28,6 @@ class SubjectRepository private constructor(private val application: Application
             val subjectCount: Int = subjectDao.getSubjectCount()
             // db is empty, lets scrape the web
             if (subjectCount == 0) {
-                Log.i("SubjectRepository", "DB empty -> scraping")
                 val subjects: List<Subject> = scrapeSubjects(userRepository.getSessionCookie()!!)
                 subjectDao.insertAll(subjects.asDatabaseModel())
             }

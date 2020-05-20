@@ -1,7 +1,9 @@
 package com.tinko.unizaexamwatchdog.ui
 
 import android.os.Bundle
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             R.id.loginFragment
         ))
 
-        setSupportActionBar(findViewById(R.id.topAppBar))
+        setSupportActionBar(findViewById(R.id.top_app_bar))
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 

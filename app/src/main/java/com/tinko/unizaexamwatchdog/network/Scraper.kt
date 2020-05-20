@@ -1,6 +1,5 @@
 package com.tinko.unizaexamwatchdog.network
 
-import android.util.Log
 import com.tinko.unizaexamwatchdog.domain.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -21,24 +20,24 @@ suspend fun scrapeSubjects(sessionCookie: String): List<Subject> = withContext(D
     // table of subjects
     val tableRows: Elements = doc.select("table#id-tabulka-predmety-s table tbody > tr")
 
-    var term = ""
+    // default
+    var term: Term? = null
 
     tableRows.forEach {
         // check header to determine current term (summer or winter)
-        if (it.select("td").first().id() == "predmety-s-lng5") {
-            term = WINTER_SUBJECT
-        } else if (it.select("td").first().id() == "predmety-s-lng6") {
-            term = SUMMER_SUBJECT
-        }
+        if (it.select("td").first().id() == "predmety-s-lng5")
+            term = Term.WINTER
+        else if (it.select("td").first().id() == "predmety-s-lng6")
+            term = Term.SUMMER
 
         // subject has 5 columns
-        if (!term.isEmpty() && it.childrenSize() == 5) {
+        if (term != null && it.childrenSize() == 5) {
             val subjectIdAndName = it.child(0).text()
             val subjectId = subjectIdAndName.subSequence(0, subjectIdAndName.indexOf(' ')).toString()
             val subjectName = it.child(0).select("a").text();
             val subjectExamsUrl = it.child(3).select("a").attr("abs:href")
 
-            subjects.add(Subject(subjectId, subjectName, term, subjectExamsUrl))
+            subjects.add(Subject(subjectId, subjectName.capitalize(), term!!, subjectExamsUrl))
         }
     }
 

@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.tinko.unizaexamwatchdog.domain.Term
 import com.tinko.unizaexamwatchdog.network.AuthRes
 import com.tinko.unizaexamwatchdog.network.AuthService
 import com.tinko.unizaexamwatchdog.network.SESSION_COOKIE_NAME
@@ -29,6 +30,10 @@ class UserRepository private constructor(application: Application) {
     val authState : LiveData<AuthenticationState>
         get() = _authState
 
+    private val _term = MutableLiveData<Term>()
+    val term : LiveData<Term>
+        get() = _term
+
     init {
         Log.i("UserRepository", "init")
 
@@ -36,6 +41,13 @@ class UserRepository private constructor(application: Application) {
             null -> AuthenticationState.UNAUTHENTICATED
             else -> AuthenticationState.AUTHENTICATED
         }
+
+        _term.value = preferences.getTerm()
+    }
+
+    fun saveTerm(term: Term) {
+        preferences.saveTerm(term)
+        _term.value = term
     }
 
     fun getSessionCookie(): String? = preferences.getSessionCookie()

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/winter_term"
+        android:enabled="true"
+        android:icon="@drawable/ic_snow"
+        android:title="@string/winter_term"/>
+    <item
+        android:id="@+id/summer_term"
+        android:enabled="true"
+        android:icon="@drawable/ic_sun"
+        android:title="@string/summer_term"/>
+</menu>

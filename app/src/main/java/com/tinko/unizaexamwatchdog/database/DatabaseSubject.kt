@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.tinko.unizaexamwatchdog.domain.Subject
+import com.tinko.unizaexamwatchdog.domain.WINTER_TERM_STRING
+import com.tinko.unizaexamwatchdog.domain.Term
 
 @Entity(tableName = "subjects")
 data class DatabaseSubject(
@@ -18,11 +20,15 @@ data class DatabaseSubject(
 
 fun List<DatabaseSubject>.asDomainModel(): List<Subject> {
     return map {
-        Subject(
-            id = it.id,
-            name = it.name,
-            term = it.term,
-            examsUrl = it.examsUrl
-        )
+        it.asDomainModel()
     }
+}
+
+fun DatabaseSubject.asDomainModel(): Subject {
+    return Subject(
+        id = this.id,
+        name = this.name,
+        term = if (this.term == WINTER_TERM_STRING) Term.WINTER else Term.SUMMER,
+        examsUrl = this.examsUrl
+    )
 }
