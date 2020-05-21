@@ -16,7 +16,8 @@ data class Subject(
     val id: String,
     val name: String,
     val term: Term,
-    var examsUrl: String
+    val examsUrl: String,
+    var watched: Boolean
 )
 
 fun List<Subject>.asDatabaseModel(): List<DatabaseSubject> {
@@ -30,7 +31,8 @@ fun Subject.asDatabaseModel(): DatabaseSubject {
         id = this.id,
         name = this.name,
         term = this.term.toString(),
-        examsUrl = this.examsUrl
+        examsUrl = this.examsUrl,
+        watched = this.watched
     )
 }
 
@@ -38,4 +40,20 @@ fun List<Subject>.filter(term: Term): List<Subject> {
     return filter {
         it.term == term
     }
+}
+
+fun List<Subject>.hasSameSubjectsAs(subjects: List<Subject>): Boolean {
+    if (this.size == subjects.size) {
+        var match = true
+        this.forEachIndexed { index, subject ->
+            val otherSubject = subjects[index]
+            if (subject.id != otherSubject.id) {
+                match = false
+            }
+        }
+
+        return match
+    }
+
+    return false
 }

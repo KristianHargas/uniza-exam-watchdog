@@ -1,14 +1,11 @@
 package com.tinko.unizaexamwatchdog.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface SubjectDao {
-    @Query("SELECT * FROM subjects ORDER BY term DESC")
+    @Query("SELECT * FROM subjects ORDER BY name")
     fun getAllSubjects(): LiveData<List<DatabaseSubject>>
 
     @Query("SELECT count(*) FROM subjects")
@@ -16,4 +13,7 @@ interface SubjectDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(subjects: List<DatabaseSubject>)
+
+    @Update
+    suspend fun updateSubject(subject: DatabaseSubject)
 }

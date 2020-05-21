@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 // Annotates class to be a Room Database with a table (entity) of the Word class
 // https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin/#6
-@Database(entities = arrayOf(DatabaseSubject::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(DatabaseSubject::class), version = 2, exportSchema = false)
 public abstract class MyRoomDatabase : RoomDatabase() {
 
     abstract fun subjectDao(): SubjectDao

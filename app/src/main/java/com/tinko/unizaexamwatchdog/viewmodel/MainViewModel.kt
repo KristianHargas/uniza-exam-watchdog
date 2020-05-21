@@ -23,6 +23,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         subjectRepository.loadSubjects()
     }
 
+    fun updateSubject(subject: Subject, watcherState: Boolean) = viewModelScope.launch {
+        subjectRepository.updateSubject(subject, watcherState)
+    }
+
     fun termChanged(term: Term) = userRepository.saveTerm(term)
 
     override fun onCleared() {

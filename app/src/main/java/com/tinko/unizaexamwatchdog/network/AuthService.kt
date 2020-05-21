@@ -6,6 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 const val SESSION_COOKIE_NAME = "PHPSESSID"
@@ -18,7 +19,16 @@ interface AuthService {
     @POST("login.php")
     suspend fun login(
         @Field("meno") name: String,
-        @Field("heslo") password: String): Response<AuthRes>
+        @Field("heslo") password: String
+    ): Response<AuthRes>
+
+    @FormUrlEncoded
+    @POST("login.php")
+    suspend fun refresh(
+        @Field("meno") name: String,
+        @Field("heslo") password: String,
+        @Header("Cookie") sessionCookie: String
+    ): Response<AuthRes>
 }
 
 private val service: AuthService by lazy {

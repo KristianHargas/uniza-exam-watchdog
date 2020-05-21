@@ -23,13 +23,24 @@ class SubjectRepository private constructor(private val application: Application
         it.asDomainModel()
     }
 
+    suspend fun updateSubject(subject: Subject, watcherState: Boolean) = withContext(Dispatchers.IO) {
+        // only when there is a change update db
+        if (subject.watched != watcherState) {
+            subject.watched = watcherState
+            subjectDao.updateSubject(subject.asDatabaseModel())
+        }
+    }
+
     suspend fun loadSubjects() = withContext(Dispatchers.IO) {
-        if (UserRepository.getInstance(application).authState.value == AuthenticationState.AUTHENTICATED) {
+        if (userRepository.authState.value == AuthenticationState.AUTHENTICATED) {
             val subjectCount: Int = subjectDao.getSubjectCount()
             // db is empty, lets scrape the web
             if (subjectCount == 0) {
-                val subjects: List<Subject> = scrapeSubjects(userRepository.getSessionCookie()!!)
-                subjectDao.insertAll(subjects.asDatabaseModel())
+                // refresh session in case it expired
+                if (userRepository.refreshSession()) {
+                    val subjects: List<Subject> = scrapeSubjects(userRepository.getSessionCookie()!!)
+                    subjectDao.insertAll(subjects.asDatabaseModel())
+                }
             }
         }
     }

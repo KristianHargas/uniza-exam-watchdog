@@ -12,11 +12,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.tinko.unizaexamwatchdog.R
 import com.tinko.unizaexamwatchdog.adapter.SubjectListAdapter
+import com.tinko.unizaexamwatchdog.adapter.SubjectListener
 import com.tinko.unizaexamwatchdog.databinding.FragmentMainScreenBinding
+import com.tinko.unizaexamwatchdog.domain.Subject
 import com.tinko.unizaexamwatchdog.domain.Term
 import com.tinko.unizaexamwatchdog.domain.filter
 import com.tinko.unizaexamwatchdog.repository.AuthenticationState
 import com.tinko.unizaexamwatchdog.viewmodel.MainViewModel
+import java.io.IOException
 
 class MainScreenFragment : Fragment() {
 
@@ -40,7 +43,18 @@ class MainScreenFragment : Fragment() {
         binding.mainViewModel = mainViewModel
         this.binding = binding
 
-        adapter = SubjectListAdapter()
+        val subjectListener: SubjectListener = object : SubjectListener {
+            override fun subjectClicked(subject: Subject) {
+                Log.i(TAG, "Subject clicked: ${subject.name}")
+            }
+
+            override fun subjectWatcherStateChanged(state: Boolean, subject: Subject) {
+                Log.i(TAG, "Subject watcher changed: ${subject.name} - $state")
+                mainViewModel.updateSubject(subject, state)
+            }
+        }
+
+        adapter = SubjectListAdapter(subjectListener)
         binding.subjectsRecyclerView.adapter = adapter
 
         return binding.root

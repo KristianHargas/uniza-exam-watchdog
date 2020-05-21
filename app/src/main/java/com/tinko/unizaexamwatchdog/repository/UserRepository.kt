@@ -35,8 +35,6 @@ class UserRepository private constructor(application: Application) {
         get() = _term
 
     init {
-        Log.i("UserRepository", "init")
-
         _authState.value = when(preferences.getUsername()) {
             null -> AuthenticationState.UNAUTHENTICATED
             else -> AuthenticationState.AUTHENTICATED
@@ -54,6 +52,24 @@ class UserRepository private constructor(application: Application) {
 
     fun loginCancelled() {
         _authState.value = AuthenticationState.UNAUTHENTICATED
+    }
+
+    suspend fun refreshSession(): Boolean {
+        if (preferences.getSessionCookie() != null) {
+            return try {
+                val res: Response<AuthRes> = authService.refresh(
+                    preferences.getUsername()!!,
+                    preferences.getPassword()!!,
+                    preferences.getSessionCookie()!!
+                )
+
+                res.body()?.logged ?: false
+            } catch (e: Throwable) {
+                false
+            }
+        }
+
+        return false
     }
 
     suspend fun login(username: String, password: String) {
@@ -79,7 +95,6 @@ class UserRepository private constructor(application: Application) {
                     val sessionCookie = sessionCookieStr.substring(start, sessionCookieStr.indexOf(';', start))
 
                     // save
-                    Log.i("UserRepository", sessionCookie)
                     preferences.saveUserData(username, password, sessionCookie)
 
                     _authState.value = AuthenticationState.AUTHENTICATED

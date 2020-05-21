@@ -15,7 +15,8 @@ data class DatabaseSubject(
     val name: String,
     val term: String,
     @ColumnInfo(name = "exams_url")
-    var examsUrl: String
+    val examsUrl: String,
+    var watched: Boolean
 )
 
 fun List<DatabaseSubject>.asDomainModel(): List<Subject> {
@@ -29,6 +30,7 @@ fun DatabaseSubject.asDomainModel(): Subject {
         id = this.id,
         name = this.name,
         term = if (this.term == WINTER_TERM_STRING) Term.WINTER else Term.SUMMER,
-        examsUrl = this.examsUrl
+        examsUrl = this.examsUrl,
+        watched = this.watched
     )
 }
