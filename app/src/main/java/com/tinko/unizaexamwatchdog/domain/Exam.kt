@@ -1,5 +1,6 @@
 package com.tinko.unizaexamwatchdog.domain
 
+import com.tinko.unizaexamwatchdog.database.DatabaseExam
 import java.util.*
 
 data class Exam(
@@ -10,3 +11,20 @@ data class Exam(
     val note: String,
     val subjectId: String
 )
+
+fun Exam.asDatabaseModel(): DatabaseExam {
+    return DatabaseExam(
+        date = this.date,
+        room = this.room,
+        teacher = this.teacher,
+        capacity = this.capacity,
+        note = this.note,
+        subjectId = this.subjectId
+    )
+}
+
+fun List<Exam>.asDatabaseModel(): List<DatabaseExam> {
+    return map {
+        it.asDatabaseModel()
+    }
+}
