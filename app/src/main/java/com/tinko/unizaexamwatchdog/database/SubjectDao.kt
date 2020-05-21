@@ -11,6 +11,9 @@ interface SubjectDao {
     @Query("SELECT count(*) FROM subjects")
     suspend fun getSubjectCount(): Int
 
+    @Query("SELECT * FROM subjects WHERE watched = 1")
+    suspend fun getWatchedSubjects(): List<DatabaseSubject>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(subjects: List<DatabaseSubject>)
 

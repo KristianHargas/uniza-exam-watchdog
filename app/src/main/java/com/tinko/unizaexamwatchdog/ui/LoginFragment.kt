@@ -44,6 +44,8 @@ class LoginFragment : Fragment() {
         binding.loginViewModel = loginViewModel
         this.binding = binding
 
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.login_screen_title)
+
         return binding.root
     }
 

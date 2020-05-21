@@ -6,6 +6,7 @@ import androidx.lifecycle.*
 import com.tinko.unizaexamwatchdog.domain.Subject
 import com.tinko.unizaexamwatchdog.domain.Term
 import com.tinko.unizaexamwatchdog.repository.AuthenticationState
+import com.tinko.unizaexamwatchdog.repository.ExamRepository
 import com.tinko.unizaexamwatchdog.repository.SubjectRepository
 import com.tinko.unizaexamwatchdog.repository.UserRepository
 import kotlinx.coroutines.launch
@@ -14,12 +15,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val userRepository: UserRepository = UserRepository.getInstance(application)
     private val subjectRepository : SubjectRepository by lazy { SubjectRepository.getInstance(application) }
+    private val examsRepositary: ExamRepository by lazy { ExamRepository.getInstance(application) }
 
     val authenticated: LiveData<AuthenticationState> = userRepository.authState
     val term: LiveData<Term> = userRepository.term
     val allSubjects: LiveData<List<Subject>> = subjectRepository.allSubjects
 
-    fun loadSubjects() =  viewModelScope.launch {
+    fun loadSubjects() = viewModelScope.launch {
         subjectRepository.loadSubjects()
     }
 
@@ -28,6 +30,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun termChanged(term: Term) = userRepository.saveTerm(term)
+
+    fun loadExams() = viewModelScope.launch {
+        examsRepositary.loadExams()
+    }
 
     override fun onCleared() {
         super.onCleared()

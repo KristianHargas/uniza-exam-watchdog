@@ -45,11 +45,10 @@ class MainScreenFragment : Fragment() {
 
         val subjectListener: SubjectListener = object : SubjectListener {
             override fun subjectClicked(subject: Subject) {
-                Log.i(TAG, "Subject clicked: ${subject.name}")
+                mainViewModel.loadExams()
             }
 
             override fun subjectWatcherStateChanged(state: Boolean, subject: Subject) {
-                Log.i(TAG, "Subject watcher changed: ${subject.name} - $state")
                 mainViewModel.updateSubject(subject, state)
             }
         }
