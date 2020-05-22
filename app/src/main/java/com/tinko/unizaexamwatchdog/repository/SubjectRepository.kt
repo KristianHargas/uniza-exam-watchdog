@@ -1,7 +1,6 @@
 package com.tinko.unizaexamwatchdog.repository
 
-import android.app.Application
-import android.util.Log
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.tinko.unizaexamwatchdog.database.MyRoomDatabase
@@ -14,10 +13,10 @@ import com.tinko.unizaexamwatchdog.util.SingletonHolder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class SubjectRepository private constructor(private val application: Application) {
+class SubjectRepository private constructor(private val context: Context) {
 
-    private val userRepository: UserRepository by lazy { UserRepository.getInstance(application) }
-    private val subjectDao: SubjectDao by lazy { MyRoomDatabase.getDatabase(application).subjectDao() }
+    private val userRepository: UserRepository by lazy { UserRepository.getInstance(context) }
+    private val subjectDao: SubjectDao by lazy { MyRoomDatabase.getDatabase(context).subjectDao() }
 
     val allSubjects: LiveData<List<Subject>> = Transformations.map(subjectDao.getAllSubjects()) {
         it.asDomainModel()
@@ -37,7 +36,7 @@ class SubjectRepository private constructor(private val application: Application
             // db is empty, lets scrape the web
             if (subjectCount == 0) {
                 // refresh session in case it expired
-                if (userRepository.refreshSession()) {
+                if (userRepository.refreshSessionFromApp()) {
                     val subjects: List<Subject> = scrapeSubjects(userRepository.getSessionCookie()!!)
                     subjectDao.insertAll(subjects.asDatabaseModel())
                 }
@@ -45,5 +44,5 @@ class SubjectRepository private constructor(private val application: Application
         }
     }
 
-    companion object : SingletonHolder<SubjectRepository, Application>(::SubjectRepository)
+    companion object : SingletonHolder<SubjectRepository, Context>(::SubjectRepository)
 }

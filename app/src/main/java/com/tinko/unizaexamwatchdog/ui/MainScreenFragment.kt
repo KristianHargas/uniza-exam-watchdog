@@ -45,7 +45,7 @@ class MainScreenFragment : Fragment() {
 
         val subjectListener: SubjectListener = object : SubjectListener {
             override fun subjectClicked(subject: Subject) {
-                mainViewModel.loadExams()
+
             }
 
             override fun subjectWatcherStateChanged(state: Boolean, subject: Subject) {

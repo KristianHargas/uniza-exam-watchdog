@@ -1,18 +1,19 @@
 package com.tinko.unizaexamwatchdog.preferences
 
 import android.app.Application
+import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.tinko.unizaexamwatchdog.domain.Term
 import com.tinko.unizaexamwatchdog.domain.WINTER_TERM_STRING
 
-class UserPreferences(application: Application) {
+class UserPreferences(context: Context) {
     private val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 
     private val sharedPreferences = EncryptedSharedPreferences.create(
         FILE_NAME,
         masterKeyAlias,
-        application,
+        context,
         EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
     )

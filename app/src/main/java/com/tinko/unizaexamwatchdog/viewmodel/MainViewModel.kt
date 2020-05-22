@@ -15,7 +15,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val userRepository: UserRepository = UserRepository.getInstance(application)
     private val subjectRepository : SubjectRepository by lazy { SubjectRepository.getInstance(application) }
-    private val examsRepositary: ExamRepository by lazy { ExamRepository.getInstance(application) }
+    private val examsRepository: ExamRepository by lazy { ExamRepository.getInstance(application) }
 
     val authenticated: LiveData<AuthenticationState> = userRepository.authState
     val term: LiveData<Term> = userRepository.term
@@ -30,10 +30,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun termChanged(term: Term) = userRepository.saveTerm(term)
-
-    fun loadExams() = viewModelScope.launch {
-        examsRepositary.loadExams()
-    }
 
     override fun onCleared() {
         super.onCleared()

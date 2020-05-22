@@ -1,6 +1,7 @@
 package com.tinko.unizaexamwatchdog.repository
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,10 +22,10 @@ enum class AuthenticationState {
     NETWORK_ERROR
 }
 
-class UserRepository private constructor(application: Application) {
+class UserRepository private constructor(context: Context) {
 
     private val authService: AuthService by lazy { getAuthService() }
-    private val preferences: UserPreferences = UserPreferences(application)
+    private val preferences: UserPreferences = UserPreferences(context)
 
     private val _authState = MutableLiveData<AuthenticationState>()
     val authState : LiveData<AuthenticationState>
@@ -54,22 +55,8 @@ class UserRepository private constructor(application: Application) {
         _authState.value = AuthenticationState.UNAUTHENTICATED
     }
 
-    suspend fun refreshSession(): Boolean {
-        if (preferences.getSessionCookie() != null) {
-            return try {
-                val res: Response<AuthRes> = authService.refresh(
-                    preferences.getUsername()!!,
-                    preferences.getPassword()!!,
-                    preferences.getSessionCookie()!!
-                )
-
-                res.body()?.logged ?: false
-            } catch (e: Throwable) {
-                false
-            }
-        }
-
-        return false
+    suspend fun refreshSessionFromApp(): Boolean {
+        return UserRepository.refreshSession(preferences, authService)
     }
 
     suspend fun login(username: String, password: String) {
@@ -111,5 +98,31 @@ class UserRepository private constructor(application: Application) {
         }
     }
 
-    companion object : SingletonHolder<UserRepository, Application>(::UserRepository)
+    companion object : SingletonHolder<UserRepository, Context>(::UserRepository) {
+
+        suspend fun refreshSessionFromBackgroundAndGetCookie(context: Context): String? {
+            val preferences = UserPreferences(context)
+            val authService = getAuthService()
+
+            return if (UserRepository.refreshSession(preferences, authService)) preferences.getSessionCookie() else null
+        }
+
+        suspend fun refreshSession(preferences: UserPreferences, authService: AuthService): Boolean {
+            if (preferences.getSessionCookie() != null) {
+                return try {
+                    val res: Response<AuthRes> = authService.refresh(
+                        preferences.getUsername()!!,
+                        preferences.getPassword()!!,
+                        preferences.getSessionCookie()!!
+                    )
+
+                    res.body()?.logged ?: false
+                } catch (e: Throwable) {
+                    false
+                }
+            }
+
+            return false
+        }
+    }
 }
