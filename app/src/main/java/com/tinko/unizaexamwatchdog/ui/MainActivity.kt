@@ -25,9 +25,9 @@ class MainActivity : AppCompatActivity() {
             .setRequiresBatteryNotLow(true)
             .build()
 
-        val request = PeriodicWorkRequestBuilder<WatchdogWorker>(20, TimeUnit.MINUTES)
+        val request = PeriodicWorkRequestBuilder<WatchdogWorker>(15, TimeUnit.MINUTES)
             .setConstraints(constraints)
-            .setInitialDelay(5, TimeUnit.MINUTES)
+            .setInitialDelay(3, TimeUnit.MINUTES)
             .build()
 
         WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(

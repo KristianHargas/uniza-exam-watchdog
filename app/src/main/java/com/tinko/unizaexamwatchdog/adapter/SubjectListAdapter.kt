@@ -11,13 +11,8 @@ class SubjectListAdapter(private val listener: SubjectListener) : RecyclerView.A
 
     var subjects: List<Subject> = emptyList()
         set(value) {
-            // useless recyclerview redraw prevention
-            if (value.hasSameSubjectsAs(field)) {
-                field = value
-            } else {
-                field = value
-                notifyDataSetChanged()
-            }
+            field = value
+            notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectViewHolder {
@@ -40,6 +35,8 @@ class SubjectListAdapter(private val listener: SubjectListener) : RecyclerView.A
         holder.binding.watchdogSwitch.setOnCheckedChangeListener { view, isChecked ->
             listener.subjectWatcherStateChanged(isChecked, subject)
         }
+
+        holder.binding.executePendingBindings()
     }
 
     override fun getItemCount(): Int = subjects.size

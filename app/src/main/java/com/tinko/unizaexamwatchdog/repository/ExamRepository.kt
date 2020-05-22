@@ -16,6 +16,7 @@ import com.tinko.unizaexamwatchdog.domain.asDatabaseModel
 import com.tinko.unizaexamwatchdog.network.scrapeExams
 import com.tinko.unizaexamwatchdog.util.SingletonHolder
 import kotlinx.coroutines.*
+import java.util.*
 import kotlin.system.measureTimeMillis
 
 class ExamRepository private constructor(private val context: Context) {
@@ -49,6 +50,9 @@ class ExamRepository private constructor(private val context: Context) {
                 if (newExams.isNotEmpty())
                     examDao.insertAll(newExams.asDatabaseModel())
 
+                // subject checked
+                subjectDao.updateLastCheck(subject.id, Calendar.getInstance().time)
+
                 if (newExams.isNotEmpty()) subject else null
             }
         }
@@ -60,7 +64,7 @@ class ExamRepository private constructor(private val context: Context) {
             // send notifications
             results.filterNotNull().forEach {
                 // notification -> new exams for given subject
-                val notificationId: Int = it.id.substring(3, 6).toInt()
+                val notificationId: Int = it.id.hashCode()
                 showNotification(it.name, "Pridané nové termíny", context, notificationId)
             }
             true

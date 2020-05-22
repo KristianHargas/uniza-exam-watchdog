@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import com.tinko.unizaexamwatchdog.domain.Subject
 import com.tinko.unizaexamwatchdog.domain.WINTER_TERM_STRING
 import com.tinko.unizaexamwatchdog.domain.Term
+import java.util.*
 
 @Entity(tableName = "subjects")
 data class DatabaseSubject(
@@ -16,7 +17,9 @@ data class DatabaseSubject(
     val term: String,
     @ColumnInfo(name = "exams_url")
     val examsUrl: String,
-    var watched: Boolean
+    var watched: Boolean = false,
+    @ColumnInfo(name = "last_check")
+    var lastCheck: Date? = null
 )
 
 fun List<DatabaseSubject>.asDomainModel(): List<Subject> {
@@ -31,6 +34,7 @@ fun DatabaseSubject.asDomainModel(): Subject {
         name = this.name,
         term = if (this.term == WINTER_TERM_STRING) Term.WINTER else Term.SUMMER,
         examsUrl = this.examsUrl,
-        watched = this.watched
+        watched = this.watched,
+        lastCheck = this.lastCheck
     )
 }

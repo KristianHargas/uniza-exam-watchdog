@@ -7,14 +7,7 @@ import androidx.room.PrimaryKey
 import com.tinko.unizaexamwatchdog.domain.Exam
 import java.util.*
 
-@Entity(tableName = "exams",
-        foreignKeys = [ForeignKey(
-            entity = DatabaseSubject::class,
-            parentColumns = arrayOf("subject_id"),
-            childColumns = arrayOf("subject_id"),
-            onDelete = ForeignKey.CASCADE
-        )]
-)
+@Entity(tableName = "exams")
 data class DatabaseExam(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "exam_id")

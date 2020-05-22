@@ -32,10 +32,10 @@
                 android:id="@+id/subject_id_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{subject.id}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="@{subject.id}"
                 tools:text="5BL145" />
 
             <TextView
@@ -43,21 +43,43 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:text="@{subject.name}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/subject_id_text"
-                android:text="@{subject.name}"
                 tools:text="Algoritmy a údajové štruktúry 1" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/watchdog_switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/watchdog_switch_label"
                 app:layout_constraintTop_toBottomOf="@+id/subject_name_text"
                 tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/subject_last_check_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:goneIfNull="@{subject.lastCheck}"
+                android:text="@string/subject_last_check_label"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/watchdog_switch" />
+
+            <TextView
+                android:id="@+id/subject_last_check_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                app:goneIfNull="@{subject.lastCheck}"
+                app:layout_constraintBaseline_toBaselineOf="@+id/subject_last_check_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:formatDate="@{subject.lastCheck}"
+                tools:text="22.05. 2020 - 09:44" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

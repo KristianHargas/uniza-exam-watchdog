@@ -15,4 +15,5 @@
     <string name="no_exams_message">Žiadne skúškové termíny</string>
     <string name="exam_capacity">Kapacita: %d</string>
     <string name="exam_teacher_and_room_label">%s - %s</string>
+    <string name="subject_last_check_label">Posledná kontrola:</string>
 </resources>

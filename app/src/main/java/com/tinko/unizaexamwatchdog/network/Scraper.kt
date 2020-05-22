@@ -42,7 +42,7 @@ suspend fun scrapeSubjects(sessionCookie: String): List<Subject> = withContext(D
                 val subjectName = it.child(0).select("a").text();
                 val subjectExamsUrl = it.child(3).select("a").attr("abs:href")
 
-                subjects.add(Subject(subjectId, subjectName.capitalize(), term!!, subjectExamsUrl, watched = false))
+                subjects.add(Subject(subjectId, subjectName.capitalize(), term!!, subjectExamsUrl))
             }
         }
     } catch(ex: IOException) {

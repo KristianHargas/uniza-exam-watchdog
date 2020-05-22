@@ -15,24 +15,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.LoginFragment">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/progressBarGuideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="4dp" />
-
-        <ProgressBar
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:indeterminate="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/progressBarGuideline"
-            android:visibility="@{loginViewModel.authenticating ? View.VISIBLE : View.GONE}"/>
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/loginNameFieldLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -124,6 +106,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loginButton"
             app:layout_constraintWidth_max="300dp" />
+
+        <ProgressBar
+            android:id="@+id/login_loading_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="@{loginViewModel.authenticating ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/login_info_security_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

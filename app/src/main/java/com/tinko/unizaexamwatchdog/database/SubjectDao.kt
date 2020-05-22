@@ -2,6 +2,7 @@ package com.tinko.unizaexamwatchdog.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import java.util.*
 
 @Dao
 interface SubjectDao {
@@ -19,4 +20,7 @@ interface SubjectDao {
 
     @Update
     suspend fun updateSubject(subject: DatabaseSubject)
+
+    @Query("UPDATE subjects SET last_check = :date WHERE subject_id = :subjectId")
+    suspend fun updateLastCheck(subjectId: String, date: Date)
 }

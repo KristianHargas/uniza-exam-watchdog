@@ -1,6 +1,7 @@
 package com.tinko.unizaexamwatchdog.domain
 
 import com.tinko.unizaexamwatchdog.database.DatabaseSubject
+import java.util.*
 
 const val SUMMER_TERM_STRING = "summer"
 const val WINTER_TERM_STRING = "winter"
@@ -17,7 +18,8 @@ data class Subject(
     val name: String,
     val term: Term,
     val examsUrl: String,
-    var watched: Boolean
+    var watched: Boolean = false,
+    var lastCheck: Date? = null
 )
 
 fun List<Subject>.asDatabaseModel(): List<DatabaseSubject> {
@@ -32,7 +34,8 @@ fun Subject.asDatabaseModel(): DatabaseSubject {
         name = this.name,
         term = this.term.toString(),
         examsUrl = this.examsUrl,
-        watched = this.watched
+        watched = this.watched,
+        lastCheck = this.lastCheck
     )
 }
 
