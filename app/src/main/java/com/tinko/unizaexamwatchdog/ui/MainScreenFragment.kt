@@ -45,7 +45,9 @@ class MainScreenFragment : Fragment() {
 
         val subjectListener: SubjectListener = object : SubjectListener {
             override fun subjectClicked(subject: Subject) {
-
+                // start exam list fragment
+                val action = MainScreenFragmentDirections.actionMainScreenFragmentToExamListFragment(subject.id, subject.name)
+                findNavController().navigate(action)
             }
 
             override fun subjectWatcherStateChanged(state: Boolean, subject: Subject) {

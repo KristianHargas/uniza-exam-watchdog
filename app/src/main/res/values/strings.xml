@@ -11,4 +11,8 @@
     <string name="watchdog_switch_label">Sledovanie skúškových termínov</string>
     <string name="winter_term">Zimný semester</string>
     <string name="summer_term">Letný semester</string>
+    <string name="exams_title">Skúškové termíny</string>
+    <string name="no_exams_message">Žiadne skúškové termíny</string>
+    <string name="exam_capacity">Kapacita: %d</string>
+    <string name="exam_teacher_and_room_label">%s - %s</string>
 </resources>

@@ -23,6 +23,11 @@ class ExamRepository private constructor(private val context: Context) {
     private val subjectDao: SubjectDao by lazy { MyRoomDatabase.getDatabase(context).subjectDao() }
     private val examDao: ExamDao by lazy { MyRoomDatabase.getDatabase(context).examDao() }
 
+    suspend fun getExamsForSubject(subjectId: String): List<Exam> = withContext(Dispatchers.IO) {
+        val exams = examDao.getExamsForSubject(subjectId)
+        exams.asDomainModel()
+    }
+
     suspend fun checkExams(): Boolean = withContext(Dispatchers.IO) {
         // get all of the watched subjects
         val watchedSubjects: List<Subject> = subjectDao.getWatchedSubjects().asDomainModel()
