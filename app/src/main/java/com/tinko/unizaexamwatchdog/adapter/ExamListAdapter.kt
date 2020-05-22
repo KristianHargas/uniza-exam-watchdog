@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tinko.unizaexamwatchdog.databinding.ExamItemBinding
 import com.tinko.unizaexamwatchdog.domain.Exam
 
-class ExamListAdapter : RecyclerView.Adapter<ExamListAdapter.ExamViewHolder>() {
+class ExamListAdapter(private val listener: ExamClickListener) : RecyclerView.Adapter<ExamListAdapter.ExamViewHolder>() {
 
     var exams: List<Exam> = emptyList()
         set(value) {
@@ -25,8 +25,8 @@ class ExamListAdapter : RecyclerView.Adapter<ExamListAdapter.ExamViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ExamViewHolder, position: Int) {
-        val exam = exams[position]
-        holder.binding.exam = exam
+        holder.binding.exam = exams[position]
+        holder.binding.listener = listener
 
         holder.binding.executePendingBindings()
     }
@@ -34,4 +34,8 @@ class ExamListAdapter : RecyclerView.Adapter<ExamListAdapter.ExamViewHolder>() {
     override fun getItemCount(): Int = exams.size
 
     inner class ExamViewHolder(val binding: ExamItemBinding): RecyclerView.ViewHolder(binding.root)
+}
+
+interface ExamClickListener {
+    fun examClicked(exam: Exam)
 }

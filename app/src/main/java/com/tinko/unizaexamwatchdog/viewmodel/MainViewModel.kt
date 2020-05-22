@@ -33,9 +33,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun logout() = viewModelScope.launch {
-        subjectRepository.deleteAllSubjects()
-        examsRepository.deleteAllExams()
         stopWorker()
+        examsRepository.deleteAllExams()
+        subjectRepository.deleteAllSubjects()
         userRepository.logout()
     }
 

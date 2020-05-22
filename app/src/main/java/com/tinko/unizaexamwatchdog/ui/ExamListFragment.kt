@@ -11,8 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 
 import com.tinko.unizaexamwatchdog.R
+import com.tinko.unizaexamwatchdog.adapter.ExamClickListener
 import com.tinko.unizaexamwatchdog.adapter.ExamListAdapter
 import com.tinko.unizaexamwatchdog.databinding.FragmentExamListBinding
+import com.tinko.unizaexamwatchdog.domain.Exam
 import com.tinko.unizaexamwatchdog.viewmodel.ExamListViewModel
 import kotlinx.coroutines.internal.artificialFrame
 
@@ -38,8 +40,18 @@ class ExamListFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.examListViewModel = examListViewModel
 
+        val examClickListener: ExamClickListener = object : ExamClickListener {
+            override fun examClicked(exam: Exam) {
+                val dialog = ExamNoteDialogFragment()
+                val bundle = Bundle()
+                bundle.putString("KEY_NOTE", exam.note)
+                dialog.arguments = bundle
+                dialog.show(parentFragmentManager, "exam_note")
+            }
+        }
+
         this.binding = binding
-        this.adapter = ExamListAdapter()
+        this.adapter = ExamListAdapter(examClickListener)
         binding.examsRecyclerView.adapter = adapter
 
         // launch loading of subjects

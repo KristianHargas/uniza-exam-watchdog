@@ -6,6 +6,9 @@
 
     <data>
         <variable
+            name="listener"
+            type="com.tinko.unizaexamwatchdog.adapter.ExamClickListener" />
+        <variable
             name="exam"
             type="com.tinko.unizaexamwatchdog.domain.Exam" />
     </data>
@@ -15,6 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{() -> listener.examClicked(exam)}"
         app:cardElevation="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,14 +28,25 @@
             android:layout_height="match_parent"
             android:padding="16dp">
 
+            <ImageView
+                android:id="@+id/exam_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_event"
+                android:tint="@color/primaryColor"
+                app:layout_constraintBottom_toBottomOf="@+id/exam_date_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/exam_date_text" />
+
             <TextView
                 android:id="@+id/exam_date_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:formatDate="@{exam.date}"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/exam_icon"
                 tools:text="22.05. 2020 - 09:00" />
 
             <TextView
@@ -41,7 +58,7 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/exam_date_text"
-                tools:text="RA222 - Ida Stankovianska" />
+                tools:text="RA222 - Idka Stankovianska" />
 
             <TextView
                 android:id="@+id/exam_capacity_text"
