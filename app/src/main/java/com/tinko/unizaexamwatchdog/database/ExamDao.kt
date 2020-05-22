@@ -11,4 +11,7 @@ interface ExamDao {
 
     @Insert
     suspend fun insertAll(exams: List<DatabaseExam>)
+
+    @Query("DELETE FROM exams")
+    suspend fun deleteAllExams()
 }

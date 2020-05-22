@@ -44,5 +44,9 @@ class SubjectRepository private constructor(private val context: Context) {
         }
     }
 
+    suspend fun deleteAllSubjects() {
+        subjectDao.deleteAllSubjects()
+    }
+
     companion object : SingletonHolder<SubjectRepository, Context>(::SubjectRepository)
 }

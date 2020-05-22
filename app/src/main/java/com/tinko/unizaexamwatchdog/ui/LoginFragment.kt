@@ -71,7 +71,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun showSnackbar(stringId: Int) {
-        Snackbar.make(binding.root, stringId, Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(binding.root, stringId, Snackbar.LENGTH_LONG).show()
     }
 
     private fun hideVirtualKeyboard() {

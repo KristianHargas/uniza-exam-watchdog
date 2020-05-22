@@ -3,13 +3,13 @@ package com.tinko.unizaexamwatchdog.ui
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.*
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.tinko.unizaexamwatchdog.R
 import com.tinko.unizaexamwatchdog.adapter.SubjectListAdapter
 import com.tinko.unizaexamwatchdog.adapter.SubjectListener
@@ -19,6 +19,7 @@ import com.tinko.unizaexamwatchdog.domain.Term
 import com.tinko.unizaexamwatchdog.domain.filter
 import com.tinko.unizaexamwatchdog.repository.AuthenticationState
 import com.tinko.unizaexamwatchdog.viewmodel.MainViewModel
+import com.tinko.unizaexamwatchdog.work.setupWorker
 import java.io.IOException
 
 class MainScreenFragment : Fragment() {
@@ -37,6 +38,9 @@ class MainScreenFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.i(TAG, "onCreateView");
 
+        // options menu
+        setHasOptionsMenu(true)
+
         // Inflate the layout for this fragment
         val binding = FragmentMainScreenBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -52,6 +56,7 @@ class MainScreenFragment : Fragment() {
 
             override fun subjectWatcherStateChanged(state: Boolean, subject: Subject) {
                 mainViewModel.updateSubject(subject, state)
+                Snackbar.make(binding.root, "Sledovanie predmetu ${subject.name} ${if (state) "zapnuté" else "vypnuté"}", Snackbar.LENGTH_SHORT).show()
             }
         }
 
@@ -118,6 +123,66 @@ class MainScreenFragment : Fragment() {
                 }
                 else -> false
             }
+        }
+
+        mainViewModel.workerState.observe(viewLifecycleOwner, Observer {
+            Log.i("WorkManager", "Checking worker state...")
+            it?.apply {
+                this.filterNotNull().forEach {
+                    Log.i("WorkManager", it.state.toString())
+                }
+            }
+        })
+
+        mainViewModel.workerRunning.observe(viewLifecycleOwner, Observer {
+            it?.apply {
+                activity?.invalidateOptionsMenu()
+                Log.i("WorkManager", "bool state: ${this}")
+            }
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main_options_menu, menu)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+
+        when (mainViewModel.workerRunning.value) {
+            true -> {
+                menu.findItem(R.id.menu_item_watchdog_on).isVisible = false
+                menu.findItem(R.id.menu_item_watchdog_off).isVisible = true
+            }
+            false -> {
+                menu.findItem(R.id.menu_item_watchdog_on).isVisible = true
+                menu.findItem(R.id.menu_item_watchdog_off).isVisible = false
+            }
+            else -> {
+                menu.findItem(R.id.menu_item_watchdog_on).isVisible = false
+                menu.findItem(R.id.menu_item_watchdog_off).isVisible = false
+            }
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_item_watchdog_on -> {
+                mainViewModel.startWorker()
+                Snackbar.make(binding.root, "Sledovanie všetkých predmetov zapnuté", Snackbar.LENGTH_SHORT).show()
+                true
+            }
+            R.id.menu_item_watchdog_off -> {
+                mainViewModel.stopWorker()
+                Snackbar.make(binding.root, "Sledovanie všetkých predmetov vypnuté", Snackbar.LENGTH_SHORT).show()
+                true
+            }
+            R.id.menu_item_logout -> {
+                mainViewModel.logout()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

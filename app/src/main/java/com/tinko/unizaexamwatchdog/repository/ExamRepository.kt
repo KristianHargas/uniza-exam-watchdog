@@ -1,7 +1,9 @@
 package com.tinko.unizaexamwatchdog.repository
 
 import android.app.Application
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -14,6 +16,7 @@ import com.tinko.unizaexamwatchdog.domain.Exam
 import com.tinko.unizaexamwatchdog.domain.Subject
 import com.tinko.unizaexamwatchdog.domain.asDatabaseModel
 import com.tinko.unizaexamwatchdog.network.scrapeExams
+import com.tinko.unizaexamwatchdog.ui.MainActivity
 import com.tinko.unizaexamwatchdog.util.SingletonHolder
 import kotlinx.coroutines.*
 import java.util.*
@@ -27,6 +30,10 @@ class ExamRepository private constructor(private val context: Context) {
     suspend fun getExamsForSubject(subjectId: String): List<Exam> = withContext(Dispatchers.IO) {
         val exams = examDao.getExamsForSubject(subjectId)
         exams.asDomainModel()
+    }
+
+    suspend fun deleteAllExams() {
+        examDao.deleteAllExams()
     }
 
     suspend fun checkExams(): Boolean = withContext(Dispatchers.IO) {
@@ -65,7 +72,7 @@ class ExamRepository private constructor(private val context: Context) {
             results.filterNotNull().forEach {
                 // notification -> new exams for given subject
                 val notificationId: Int = it.id.hashCode()
-                showNotification(it.name, "Pridané nové termíny", context, notificationId)
+                showNotification(it.name, "Objavené nové skúškové termíny", context, notificationId)
             }
             true
         } catch (e: Throwable) {
@@ -81,11 +88,19 @@ class ExamRepository private constructor(private val context: Context) {
 }
 
 fun showNotification(title: String, message: String, context: Context, id: Int) {
+    val intent = Intent(context, MainActivity::class.java).apply {
+        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    }
+
+    val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+
     var builder = NotificationCompat.Builder(context, "WATCHDOG")
-        .setSmallIcon(R.drawable.ic_launcher_foreground)
+        .setSmallIcon(R.drawable.ic_watchdog_on)
         .setContentTitle(title)
         .setContentText(message)
         .setPriority(NotificationCompat.PRIORITY_MAX)
+        .setContentIntent(pendingIntent)
+    //.setAutoCancel
 
     with(NotificationManagerCompat.from(context)) {
         notify(id, builder.build())

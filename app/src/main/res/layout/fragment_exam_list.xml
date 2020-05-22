@@ -21,8 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingVertical="8dp"
+            android:background="@color/secondaryColor"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:visibility="@{examListViewModel.exams.empty ? View.GONE : View.VISIBLE}"
             tools:itemCount="5"
             tools:listitem="@layout/exam_item" />
 

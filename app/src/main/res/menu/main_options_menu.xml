@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_item_watchdog_on"
+        android:icon="@drawable/ic_watchdog_off"
+        android:title="Zapnúť sledovanie"
+        app:showAsAction="always"
+        android:visible="false" />
+    <item
+        android:id="@+id/menu_item_watchdog_off"
+        android:icon="@drawable/ic_watchdog_on"
+        android:title="Vypnúť sledovanie"
+        app:showAsAction="always"
+        android:visible="false" />
+    <item
+        android:id="@+id/menu_item_logout"
+        android:title="Odhlásiť sa"
+        app:showAsAction="never"
+        android:visible="true" />
+</menu>

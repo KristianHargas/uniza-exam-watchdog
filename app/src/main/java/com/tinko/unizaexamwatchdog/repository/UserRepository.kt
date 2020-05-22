@@ -98,6 +98,11 @@ class UserRepository private constructor(context: Context) {
         }
     }
 
+    suspend fun logout() {
+        preferences.clear()
+        _authState.value = AuthenticationState.UNAUTHENTICATED
+    }
+
     companion object : SingletonHolder<UserRepository, Context>(::UserRepository) {
 
         suspend fun refreshSessionFromBackgroundAndGetCookie(context: Context): String? {

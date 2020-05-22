@@ -6,6 +6,9 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.tinko.unizaexamwatchdog.domain.Term
 import com.tinko.unizaexamwatchdog.domain.WINTER_TERM_STRING
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.DisposableHandle
+import kotlinx.coroutines.withContext
 
 class UserPreferences(context: Context) {
     private val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
@@ -29,6 +32,15 @@ class UserPreferences(context: Context) {
     fun saveTerm(term: Term) {
         sharedPreferences.edit()
             .putString(TERM_KEY, term.toString())
+            .apply()
+    }
+
+    suspend fun clear() = withContext(Dispatchers.IO) {
+        sharedPreferences.edit()
+            .putString(USERNAME_KEY, null)
+            .putString(PASSWORD_KEY, null)
+            .putString(SESSION_COOKIE_KEY, null)
+            .putString(TERM_KEY, null)
             .apply()
     }
 

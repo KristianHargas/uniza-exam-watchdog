@@ -19,24 +19,6 @@ import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
-    private fun setupWorker() {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .setRequiresBatteryNotLow(true)
-            .build()
-
-        val request = PeriodicWorkRequestBuilder<WatchdogWorker>(15, TimeUnit.MINUTES)
-            .setConstraints(constraints)
-            .setInitialDelay(3, TimeUnit.MINUTES)
-            .build()
-
-        WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
-            "watchdog",
-            ExistingPeriodicWorkPolicy.KEEP,
-            request
-        )
-    }
-
     private fun createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
@@ -58,9 +40,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setupWorker()
         createNotificationChannel()
-        // showNotification("Appka zapnutá", "Testíčková notifikácia...", applicationContext)
 
         val navController = findNavController(R.id.nav_host_fragment)
         // top level destinations

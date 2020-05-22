@@ -23,4 +23,7 @@ interface SubjectDao {
 
     @Query("UPDATE subjects SET last_check = :date WHERE subject_id = :subjectId")
     suspend fun updateLastCheck(subjectId: String, date: Date)
+
+    @Query("DELETE FROM subjects")
+    suspend fun deleteAllSubjects()
 }
