@@ -8,6 +8,16 @@ import com.tinko.unizaexamwatchdog.domain.WINTER_TERM_STRING
 import com.tinko.unizaexamwatchdog.domain.Term
 import java.util.*
 
+/**
+ * Database entity which holds subject data.
+ *
+ * @property id id of the subject.
+ * @property name name of the subject.
+ * @property term term of this subject (winter/summer).
+ * @property examsUrl url to get exams of this subject from.
+ * @property watched indicator whether this subject should be watched by the watchdog or not.
+ * @property lastCheck timestamp of last exam check of this subject.
+ */
 @Entity(tableName = "subjects")
 data class DatabaseSubject(
     @PrimaryKey
@@ -22,6 +32,11 @@ data class DatabaseSubject(
     var lastCheck: Date? = null
 )
 
+/**
+ * Extension method which converts [DatabaseSubject] to domain model used within the application - [Subject].
+ *
+ * @return converted [Subject] object.
+ */
 fun DatabaseSubject.asDomainModel(): Subject {
     return Subject(
         id = this.id,
@@ -33,6 +48,11 @@ fun DatabaseSubject.asDomainModel(): Subject {
     )
 }
 
+/**
+ * Extension method which converts list of [DatabaseSubject] objects to the list of domain model objects - [Subject].
+ *
+ * @return converted list of [Subject] objects.
+ */
 fun List<DatabaseSubject>.asDomainModel(): List<Subject> {
     return map {
         it.asDomainModel()

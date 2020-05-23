@@ -7,6 +7,12 @@ import androidx.databinding.BindingAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Binding adapter which sets parsed date as content of [TextView].
+ *
+ * @param view target view.
+ * @param date content.
+ */
 @SuppressLint("SimpleDateFormat")
 @BindingAdapter("formatDate")
 fun formatDate(view: TextView, date: Date?) {
@@ -19,6 +25,12 @@ fun formatDate(view: TextView, date: Date?) {
     }
 }
 
+/**
+ * Binding adapter which hides view if provided argument is null.
+ *
+ * @param view target view.
+ * @param obj object to check for null.
+ */
 @BindingAdapter("goneIfNull")
 fun goneIfNull(view: View, obj: Any?) {
     view.visibility = if (obj == null) View.GONE else View.VISIBLE

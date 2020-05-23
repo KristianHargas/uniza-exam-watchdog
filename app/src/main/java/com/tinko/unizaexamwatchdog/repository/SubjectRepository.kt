@@ -13,6 +13,13 @@ import com.tinko.unizaexamwatchdog.util.SingletonHolder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+/**
+ * Repository class which manages all data and actions regarding subjects.
+ *
+ * Creates a layer of abstraction for view model objects.
+ *
+ * @property context application context.
+ */
 class SubjectRepository private constructor(private val context: Context) {
 
     private val userRepository: UserRepository by lazy { UserRepository.getInstance(context) }
@@ -22,11 +29,21 @@ class SubjectRepository private constructor(private val context: Context) {
         it.asDomainModel()
     }
 
-    suspend fun updateSubjectWatchState(subject: Subject, watchedState: Boolean) = withContext(Dispatchers.IO) {
-        subject.watched = watchedState
-        subjectDao.updateSubject(subject.asDatabaseModel())
-    }
+    /**
+     * This method updates watch state of the subject so whether this subject is checked by the watchdog or not.
+     *
+     * @param subject subject which is updated.
+     * @param watchedState new watch state.
+     */
+    suspend fun updateSubjectWatchState(subject: Subject, watchedState: Boolean) =
+        withContext(Dispatchers.IO) {
+            subject.watched = watchedState
+            subjectDao.updateSubject(subject.asDatabaseModel())
+        }
 
+    /**
+     * This method loads data regarding subjects from the web if the local database is empty.
+     */
     suspend fun loadSubjects() = withContext(Dispatchers.IO) {
         val subjectCount: Int = subjectDao.getSubjectCount()
         // db is empty, lets scrape the web
@@ -39,6 +56,9 @@ class SubjectRepository private constructor(private val context: Context) {
         }
     }
 
+    /**
+     * Method deletes all subjects from the database.
+     */
     suspend fun deleteAllSubjects() {
         subjectDao.deleteAllSubjects()
     }

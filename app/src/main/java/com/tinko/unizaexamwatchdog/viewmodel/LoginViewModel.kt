@@ -7,11 +7,19 @@ import com.tinko.unizaexamwatchdog.repository.UserRepository
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
+/**
+ * This view model is used by [LoginFragment].
+ *
+ * @constructor
+ * Constructs a new view model.
+ *
+ * @param application application.
+ */
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     private val userRepository: UserRepository = UserRepository.getInstance(application)
 
-    // two-way data binding with edit texts
+    // two-way data binding with text inputs
     val username = MutableLiveData<String>()
     val password = MutableLiveData<String>()
 
@@ -25,19 +33,31 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         password.value = ""
     }
 
+    /**
+     * This method is called in reaction to login button click.
+     */
     fun authenticate() {
         val enteredName: String = username.value ?: ""
         val enteredPassword: String = password.value ?: ""
 
+        // authenticate user
         viewModelScope.launch {
             userRepository.login(enteredName, enteredPassword)
         }
     }
 
-    fun loginCancelled () {
+    /**
+     * This method is called when user refuses to authenticate.
+     */
+    fun loginCancelled() {
         userRepository.loginCancelled()
     }
 
+    /**
+     * Factory class to construct new [MainViewModel].
+     *
+     * @property application application
+     */
     class Factory(private val application: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {

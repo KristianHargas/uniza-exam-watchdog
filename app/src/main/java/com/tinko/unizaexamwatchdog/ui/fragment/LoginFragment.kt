@@ -18,6 +18,9 @@ import com.tinko.unizaexamwatchdog.repository.AuthenticationState
 import com.tinko.unizaexamwatchdog.ui.MainActivity
 import com.tinko.unizaexamwatchdog.viewmodel.LoginViewModel
 
+/**
+ * This fragment is used to authenticate user.
+ */
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
@@ -26,17 +29,23 @@ class LoginFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "No activity present before onActivityCreated()!"
         }
+
         ViewModelProvider(this, LoginViewModel.Factory(activity.application))
             .get(LoginViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // set the toolbar title
         (activity as MainActivity).supportActionBar?.title = getString(R.string.login_screen_title)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // inflate the layout for this fragment using binding
         val binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = viewLifecycleOwner
@@ -49,6 +58,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // when the user presses back button in login fragment, close the app, he refused to authenticate
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             loginViewModel.loginCancelled()
             requireActivity().finish()
@@ -58,6 +68,7 @@ class LoginFragment : Fragment() {
             it?.let { state ->
                 when (state) {
                     AuthenticationState.AUTHENTICATED -> {
+                        // user is authenticated, return back to the main screen fragment
                         findNavController().popBackStack()
                     }
                     AuthenticationState.INVALID_AUTHENTICATION -> {
@@ -67,9 +78,11 @@ class LoginFragment : Fragment() {
                         showSnackBar(R.string.network_error_message)
                     }
                     AuthenticationState.AUTHENTICATING -> {
+                        // when the user presses the login button, hide virtual keyboard
                         hideVirtualKeyboard()
                     }
-                    AuthenticationState.UNAUTHENTICATED -> {}
+                    AuthenticationState.UNAUTHENTICATED -> {
+                    }
                 }
             }
         })
@@ -80,7 +93,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun hideVirtualKeyboard() {
-        val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 }

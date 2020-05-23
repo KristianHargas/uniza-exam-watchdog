@@ -6,6 +6,17 @@ import androidx.room.PrimaryKey
 import com.tinko.unizaexamwatchdog.domain.Exam
 import java.util.*
 
+/**
+ * Database entity which holds exam data.
+ *
+ * @property id id of the exam.
+ * @property date date of the exam.
+ * @property room room name.
+ * @property teacher name of the teacher.
+ * @property capacity capacity of the exam.
+ * @property note note associated with the exam.
+ * @property subjectId id of the subject this exam is associated with.
+ */
 @Entity(tableName = "exams")
 data class DatabaseExam(
     @PrimaryKey(autoGenerate = true)
@@ -20,6 +31,11 @@ data class DatabaseExam(
     val subjectId: String
 )
 
+/**
+ * Extension method which converts [DatabaseExam] to domain model used within the application - [Exam].
+ *
+ * @return converted [Exam] object.
+ */
 fun DatabaseExam.asDomainModel(): Exam {
     return Exam(
         date = this.date,
@@ -31,6 +47,11 @@ fun DatabaseExam.asDomainModel(): Exam {
     )
 }
 
+/**
+ * Extension method which converts list of [DatabaseExam] objects to the list of domain model objects - [Exam].
+ *
+ * @return converted list of [Exam] objects.
+ */
 fun List<DatabaseExam>.asDomainModel(): List<Exam> {
     return map {
         it.asDomainModel()

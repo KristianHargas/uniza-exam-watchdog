@@ -17,6 +17,11 @@ import com.tinko.unizaexamwatchdog.domain.filter
 import com.tinko.unizaexamwatchdog.ui.MainActivity
 import com.tinko.unizaexamwatchdog.viewmodel.MainViewModel
 
+/**
+ * This is the main fragment of the application.
+ *
+ * It contains list of all subjects of the authenticated user.
+ */
 class MainScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentMainScreenBinding
@@ -26,32 +31,45 @@ class MainScreenFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "No activity present before onActivityCreated()!"
         }
+
         ViewModelProvider(this, MainViewModel.Factory(activity.application))
             .get(MainViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // enable options menu
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         val binding = FragmentMainScreenBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mainViewModel = mainViewModel
         this.binding = binding
 
+        // listener which handles interaction with the subject
         val subjectListener: SubjectListener = object : SubjectListener {
             override fun subjectClicked(subject: Subject) {
-                // start exam list fragment
-                val action = MainScreenFragmentDirections.actionMainScreenFragmentToExamListFragment(subject.id, subject.name)
+                // start exam list fragment to show all of the exams for this subject
+                // we pass subject data to the exam list fragment
+                val action =
+                    MainScreenFragmentDirections.actionMainScreenFragmentToExamListFragment(
+                        subject.id,
+                        subject.name
+                    )
                 findNavController().navigate(action)
             }
 
             override fun subjectWatcherStateChanged(state: Boolean, subject: Subject) {
-                mainViewModel.updateSubject(subject, state)
-                val message = when(state) {
+                // user clicked subject's switch so he changed subject's watch state
+                mainViewModel.updateSubjectWatchState(subject, state)
+                val message = when (state) {
                     true -> getString(R.string.subject_watch_state_on_message, subject.name)
                     else -> getString(R.string.subject_watch_state_off_message, subject.name)
                 }
@@ -59,6 +77,7 @@ class MainScreenFragment : Fragment() {
             }
         }
 
+        // adapter for the recyclerview
         adapter = SubjectListAdapter(subjectListener)
         binding.subjectsRecyclerView.adapter = adapter
 
@@ -68,7 +87,7 @@ class MainScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // conditional login navigation flow or data load
+        // conditional login navigation flow
         mainViewModel.userAuthenticated.observe(viewLifecycleOwner, Observer {
             it?.let { authenticated ->
                 if (authenticated) {
@@ -81,23 +100,23 @@ class MainScreenFragment : Fragment() {
             }
         })
 
-        // term switched
+        // user selected another term (winter/summer)
         mainViewModel.term.observe(viewLifecycleOwner, Observer {
             it?.let { term ->
                 // update bottom nav selection after startup
-                val itemId = if(term == Term.WINTER) R.id.winter_term else R.id.summer_term
+                val itemId = if (term == Term.WINTER) R.id.winter_term else R.id.summer_term
                 if (binding.mainBottomMenu.selectedItemId != itemId)
                     binding.mainBottomMenu.selectedItemId = itemId
 
                 // update toolbar title
                 (activity as MainActivity).supportActionBar?.title = getString(
-                    when(term) {
+                    when (term) {
                         Term.WINTER -> R.string.winter_term
                         else -> R.string.summer_term
                     }
                 )
 
-                // update subject selection
+                // update subjects shown in the list based on newly selected term
                 mainViewModel.allSubjects.value?.apply {
                     adapter.subjects = this.filter(term)
                 }
@@ -107,13 +126,14 @@ class MainScreenFragment : Fragment() {
         // any change in loaded data is sent to adapter to get reflected in the list
         mainViewModel.allSubjects.observe(viewLifecycleOwner, Observer {
             it?.let { subjects ->
+                // filter all subjects based on currently selected term
                 adapter.subjects = subjects.filter(mainViewModel.term.value ?: Term.WINTER)
             }
         })
 
-        // term selection
+        // listener for term (winter/summer) selection
         binding.mainBottomMenu.setOnNavigationItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.summer_term -> {
                     mainViewModel.termChanged(Term.SUMMER)
                     true
@@ -126,6 +146,7 @@ class MainScreenFragment : Fragment() {
             }
         }
 
+        // anytime worker is started or canceled, invalidate options menu so menu icon is changed properly
         mainViewModel.workerRunning.observe(viewLifecycleOwner, Observer {
             it?.let {
                 activity?.invalidateOptionsMenu()
@@ -141,6 +162,7 @@ class MainScreenFragment : Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
 
+        // update visibility of toolbar icons based on work manager state
         when (mainViewModel.workerRunning.value) {
             true -> {
                 menu.findItem(R.id.menu_item_watchdog_on).isVisible = false
@@ -160,16 +182,27 @@ class MainScreenFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_item_watchdog_on -> {
+                // start watchdog worker and show snack bar
                 mainViewModel.startWorker()
-                Snackbar.make(binding.root, getString(R.string.global_watchdog_on_message), Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.global_watchdog_on_message),
+                    Snackbar.LENGTH_SHORT
+                ).show()
                 true
             }
             R.id.menu_item_watchdog_off -> {
-                mainViewModel.stopWorker()
-                Snackbar.make(binding.root, getString(R.string.global_watchdog_off_message), Snackbar.LENGTH_SHORT).show()
+                // cancel watchdog worker and show snack bar
+                mainViewModel.cancelWorker()
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.global_watchdog_off_message),
+                    Snackbar.LENGTH_SHORT
+                ).show()
                 true
             }
             R.id.menu_item_logout -> {
+                // user pressed logout item
                 mainViewModel.logout()
                 true
             }

@@ -5,6 +5,9 @@ import androidx.room.*
 import com.tinko.unizaexamwatchdog.database.entity.DatabaseSubject
 import java.util.*
 
+/**
+ * Data access object interface used by Room database to interact with subjects.
+ */
 @Dao
 interface SubjectDao {
     @Query("SELECT * FROM subjects ORDER BY name")

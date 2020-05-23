@@ -7,6 +7,9 @@ import androidx.fragment.app.DialogFragment
 import com.tinko.unizaexamwatchdog.R
 import java.lang.IllegalStateException
 
+/**
+ * This dialog fragment shows note of the exam.
+ */
 class ExamNoteDialogFragment() : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
