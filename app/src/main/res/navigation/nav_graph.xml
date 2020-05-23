@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainScreenFragment"
-        android:name="com.tinko.unizaexamwatchdog.ui.MainScreenFragment"
+        android:name="com.tinko.unizaexamwatchdog.ui.fragment.MainScreenFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_main_screen" >
         <action
@@ -28,13 +28,13 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.tinko.unizaexamwatchdog.ui.LoginFragment"
+        android:name="com.tinko.unizaexamwatchdog.ui.fragment.LoginFragment"
         android:label="@string/login_screen_title"
         tools:layout="@layout/fragment_login" />
 
     <fragment
         android:id="@+id/examListFragment"
-        android:name="com.tinko.unizaexamwatchdog.ui.ExamListFragment"
+        android:name="com.tinko.unizaexamwatchdog.ui.fragment.ExamListFragment"
         android:label="@string/exams_title"
         tools:layout="@layout/fragment_exam_list" >
         <argument

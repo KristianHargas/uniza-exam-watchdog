@@ -1,22 +1,20 @@
-package com.tinko.unizaexamwatchdog.ui
+package com.tinko.unizaexamwatchdog.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-
-import com.tinko.unizaexamwatchdog.R
 import com.tinko.unizaexamwatchdog.adapter.ExamClickListener
 import com.tinko.unizaexamwatchdog.adapter.ExamListAdapter
 import com.tinko.unizaexamwatchdog.databinding.FragmentExamListBinding
 import com.tinko.unizaexamwatchdog.domain.Exam
+import com.tinko.unizaexamwatchdog.ui.dialog.ExamNoteDialogFragment
+import com.tinko.unizaexamwatchdog.ui.MainActivity
 import com.tinko.unizaexamwatchdog.viewmodel.ExamListViewModel
-import kotlinx.coroutines.internal.artificialFrame
 
 class ExamListFragment : Fragment() {
 
@@ -32,10 +30,13 @@ class ExamListFragment : Fragment() {
     private lateinit var binding: FragmentExamListBinding
     private lateinit var adapter: ExamListAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         // set the toolbar title
         (activity as MainActivity).supportActionBar?.title = args.subjectName
+    }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentExamListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.examListViewModel = examListViewModel
@@ -44,9 +45,9 @@ class ExamListFragment : Fragment() {
             override fun examClicked(exam: Exam) {
                 val dialog = ExamNoteDialogFragment()
                 val bundle = Bundle()
-                bundle.putString("KEY_NOTE", exam.note)
+                bundle.putString(ExamNoteDialogFragment.KEY_NOTE, exam.note)
                 dialog.arguments = bundle
-                dialog.show(parentFragmentManager, "exam_note")
+                dialog.show(parentFragmentManager, ExamNoteDialogFragment.TAG)
             }
         }
 
@@ -54,18 +55,18 @@ class ExamListFragment : Fragment() {
         this.adapter = ExamListAdapter(examClickListener)
         binding.examsRecyclerView.adapter = adapter
 
-        // launch loading of subjects
-        examListViewModel.loadExams(args.subjectId)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // launch loading of subjects
+        examListViewModel.loadExams(args.subjectId)
+
         examListViewModel.exams.observe(viewLifecycleOwner, Observer {
-            it?.apply {
-                adapter.exams = it
+            it?.let { exams ->
+                adapter.exams = exams
             }
         })
     }

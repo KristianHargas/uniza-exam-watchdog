@@ -16,4 +16,16 @@
     <string name="exam_capacity">Kapacita: %d</string>
     <string name="exam_teacher_and_room_label">%s - %s</string>
     <string name="subject_last_check_label">Posledná kontrola:</string>
+    <string name="watchdog_notification_message">Objavené nové skúškové termíny: %1$d</string>
+    <string name="watchdog_notification_channel_name">Nové skúškové termíny</string>
+    <string name="watchdog_notification_channel_description">V tomto notifikačnom kanáli sú vysielané všetky notifikácie objavených skúškových termínov pri sledovaných predmetoch.</string>
+    <string name="note">Poznámka</string>
+    <string name="subject_watch_state_on_message">Sledovanie zapnuté: <b>%1$s</b></string>
+    <string name="subject_watch_state_off_message">Sledovanie vypnuté: <b>%1$s</b></string>
+    <string name="global_watchdog_on_message">Sledovanie vybraných predmetov zapnuté</string>
+    <string name="global_watchdog_off_message">Sledovanie vybraných predmetov vypnuté</string>
+    <string name="event_icon">Ikona udalosti</string>
+    <string name="global_watchdog_on_title">Zapnúť sledovanie</string>
+    <string name="global_watchdog_off_title">Vypnúť sledovanie</string>
+    <string name="logout_title">Odhlásiť sa</string>
 </resources>

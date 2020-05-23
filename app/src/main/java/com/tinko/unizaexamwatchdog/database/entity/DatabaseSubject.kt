@@ -1,4 +1,4 @@
-package com.tinko.unizaexamwatchdog.database
+package com.tinko.unizaexamwatchdog.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -22,12 +22,6 @@ data class DatabaseSubject(
     var lastCheck: Date? = null
 )
 
-fun List<DatabaseSubject>.asDomainModel(): List<Subject> {
-    return map {
-        it.asDomainModel()
-    }
-}
-
 fun DatabaseSubject.asDomainModel(): Subject {
     return Subject(
         id = this.id,
@@ -37,4 +31,10 @@ fun DatabaseSubject.asDomainModel(): Subject {
         watched = this.watched,
         lastCheck = this.lastCheck
     )
+}
+
+fun List<DatabaseSubject>.asDomainModel(): List<Subject> {
+    return map {
+        it.asDomainModel()
+    }
 }

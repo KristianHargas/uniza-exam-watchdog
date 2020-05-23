@@ -1,51 +1,41 @@
 package com.tinko.unizaexamwatchdog.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.tinko.unizaexamwatchdog.repository.AuthenticationState
 import com.tinko.unizaexamwatchdog.repository.UserRepository
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val userRepo: UserRepository = UserRepository.getInstance(application)
+    private val userRepository: UserRepository = UserRepository.getInstance(application)
 
     // two-way data binding with edit texts
-    val name = MutableLiveData<String>()
+    val username = MutableLiveData<String>()
     val password = MutableLiveData<String>()
 
-    val authenticated: LiveData<AuthenticationState> = userRepo.authState
-    val authenticating: LiveData<Boolean> = Transformations.map(authenticated) {
+    val authState: LiveData<AuthenticationState> = userRepository.authState
+    val authenticating: LiveData<Boolean> = Transformations.map(authState) {
         it == AuthenticationState.AUTHENTICATING
     }
 
     init {
-        name.value = ""
+        username.value = ""
         password.value = ""
-
-        Log.i("LoginViewModel", "init")
     }
 
     fun authenticate() {
-        val enteredName: String = name.value ?: ""
+        val enteredName: String = username.value ?: ""
         val enteredPassword: String = password.value ?: ""
 
         viewModelScope.launch {
-            userRepo.login(enteredName, enteredPassword)
+            userRepository.login(enteredName, enteredPassword)
         }
     }
 
     fun loginCancelled () {
-        userRepo.loginCancelled()
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-
-        Log.i("LoginViewModel", "onCleared")
+        userRepository.loginCancelled()
     }
 
     class Factory(private val application: Application) : ViewModelProvider.Factory {

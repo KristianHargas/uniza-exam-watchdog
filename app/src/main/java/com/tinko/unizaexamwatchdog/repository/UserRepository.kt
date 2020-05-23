@@ -1,10 +1,9 @@
 package com.tinko.unizaexamwatchdog.repository
 
-import android.app.Application
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.tinko.unizaexamwatchdog.domain.Term
 import com.tinko.unizaexamwatchdog.network.AuthRes
 import com.tinko.unizaexamwatchdog.network.AuthService
@@ -12,6 +11,8 @@ import com.tinko.unizaexamwatchdog.network.SESSION_COOKIE_NAME
 import com.tinko.unizaexamwatchdog.network.getAuthService
 import com.tinko.unizaexamwatchdog.preferences.UserPreferences
 import com.tinko.unizaexamwatchdog.util.SingletonHolder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 enum class AuthenticationState {
@@ -31,6 +32,10 @@ class UserRepository private constructor(context: Context) {
     val authState : LiveData<AuthenticationState>
         get() = _authState
 
+    val authenticated: LiveData<Boolean> = Transformations.map(authState) {
+        it == AuthenticationState.AUTHENTICATED
+    }
+
     private val _term = MutableLiveData<Term>()
     val term : LiveData<Term>
         get() = _term
@@ -44,19 +49,24 @@ class UserRepository private constructor(context: Context) {
         _term.value = preferences.getTerm()
     }
 
-    fun saveTerm(term: Term) {
-        preferences.saveTerm(term)
+    fun saveSelectedTerm(term: Term) {
+        preferences.saveSelectedTerm(term)
         _term.value = term
     }
 
     fun getSessionCookie(): String? = preferences.getSessionCookie()
 
-    fun loginCancelled() {
+    suspend fun refreshSessionFromApp(): Boolean {
+        return refreshSession(preferences, authService)
+    }
+
+    suspend fun logout() {
+        preferences.clear()
         _authState.value = AuthenticationState.UNAUTHENTICATED
     }
 
-    suspend fun refreshSessionFromApp(): Boolean {
-        return UserRepository.refreshSession(preferences, authService)
+    fun loginCancelled() {
+        _authState.value = AuthenticationState.UNAUTHENTICATED
     }
 
     suspend fun login(username: String, password: String) {
@@ -82,7 +92,7 @@ class UserRepository private constructor(context: Context) {
                     val sessionCookie = sessionCookieStr.substring(start, sessionCookieStr.indexOf(';', start))
 
                     // save
-                    preferences.saveUserData(username, password, sessionCookie)
+                    preferences.saveCredentials(username, password, sessionCookie)
 
                     _authState.value = AuthenticationState.AUTHENTICATED
                 } else {
@@ -93,14 +103,8 @@ class UserRepository private constructor(context: Context) {
                 throw Exception("Server sent unexpected response code!")
             }
         } catch (e: Throwable) {
-            Log.e("UserRepository", e.message)
             _authState.value = AuthenticationState.NETWORK_ERROR
         }
-    }
-
-    suspend fun logout() {
-        preferences.clear()
-        _authState.value = AuthenticationState.UNAUTHENTICATED
     }
 
     companion object : SingletonHolder<UserRepository, Context>(::UserRepository) {
@@ -109,10 +113,10 @@ class UserRepository private constructor(context: Context) {
             val preferences = UserPreferences(context)
             val authService = getAuthService()
 
-            return if (UserRepository.refreshSession(preferences, authService)) preferences.getSessionCookie() else null
+            return if (refreshSession(preferences, authService)) preferences.getSessionCookie() else null
         }
 
-        suspend fun refreshSession(preferences: UserPreferences, authService: AuthService): Boolean {
+        private suspend fun refreshSession(preferences: UserPreferences, authService: AuthService): Boolean {
             if (preferences.getSessionCookie() != null) {
                 return try {
                     val res: Response<AuthRes> = authService.refresh(

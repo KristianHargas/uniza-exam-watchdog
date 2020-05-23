@@ -14,7 +14,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.ExamListFragment">
+        tools:context=".ui.fragment.ExamListFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/exams_recycler_view"

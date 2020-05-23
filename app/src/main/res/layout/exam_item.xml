@@ -36,7 +36,8 @@
                 android:tint="@color/primaryColor"
                 app:layout_constraintBottom_toBottomOf="@+id/exam_date_text"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/exam_date_text" />
+                app:layout_constraintTop_toTopOf="@+id/exam_date_text"
+                android:contentDescription="@string/event_icon" />
 
             <TextView
                 android:id="@+id/exam_date_text"

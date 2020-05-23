@@ -1,7 +1,8 @@
-package com.tinko.unizaexamwatchdog.database
+package com.tinko.unizaexamwatchdog.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.tinko.unizaexamwatchdog.database.entity.DatabaseSubject
 import java.util.*
 
 @Dao

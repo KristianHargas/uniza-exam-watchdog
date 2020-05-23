@@ -1,8 +1,9 @@
-package com.tinko.unizaexamwatchdog.database
+package com.tinko.unizaexamwatchdog.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.tinko.unizaexamwatchdog.database.entity.DatabaseExam
 
 @Dao
 interface ExamDao {

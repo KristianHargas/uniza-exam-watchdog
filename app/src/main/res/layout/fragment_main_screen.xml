@@ -6,7 +6,6 @@
 
     <data>
         <import type="android.view.View" />
-        <import type="com.tinko.unizaexamwatchdog.repository.AuthenticationState" />
         <variable
             name="mainViewModel"
             type="com.tinko.unizaexamwatchdog.viewmodel.MainViewModel" />
@@ -15,19 +14,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.MainScreenFragment">
+        tools:context=".ui.fragment.MainScreenFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/subjects_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:paddingVertical="8dp"
-            android:background="@color/secondaryColor"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:visibility="@{mainViewModel.allSubjects.empty ? View.GONE : View.VISIBLE}"
+            android:background="@color/secondaryColor"
             app:layout_constraintBottom_toTopOf="@+id/main_bottom_menu"
             app:layout_constraintTop_toTopOf="parent"
-            android:visibility="@{mainViewModel.allSubjects.empty ? View.GONE : View.VISIBLE}"
             tools:itemCount="4"
             tools:listitem="@layout/subject_item" />
 
@@ -44,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:indeterminate="true"
-            android:visibility="@{mainViewModel.allSubjects.empty &amp;&amp; mainViewModel.authenticated == AuthenticationState.AUTHENTICATED ? View.VISIBLE : View.GONE}"
+            android:visibility="@{mainViewModel.allSubjects.empty &amp;&amp; mainViewModel.userAuthenticated ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toTopOf="@+id/main_bottom_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

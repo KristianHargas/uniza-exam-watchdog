@@ -1,11 +1,13 @@
 package com.tinko.unizaexamwatchdog.util
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
+@SuppressLint("SimpleDateFormat")
 @BindingAdapter("formatDate")
 fun formatDate(view: TextView, date: Date?) {
     if (date == null) {

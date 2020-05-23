@@ -1,25 +1,32 @@
 package com.tinko.unizaexamwatchdog.work
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Context
-import android.os.Build
 import androidx.work.*
+import com.tinko.unizaexamwatchdog.domain.Subject
+import com.tinko.unizaexamwatchdog.repository.ExamDiscoveryListener
 import com.tinko.unizaexamwatchdog.repository.ExamRepository
-import com.tinko.unizaexamwatchdog.repository.showNotification
+import com.tinko.unizaexamwatchdog.util.showWatchdogNotification
 import java.util.concurrent.TimeUnit
+
+private const val WATCHDOG_WORKER_NAME = "watchdog"
 
 class WatchdogWorker(private val context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
-        return when(ExamRepository.getInstance(context).checkExams()) {
+        val examDiscoveryListener: ExamDiscoveryListener = object : ExamDiscoveryListener {
+            override fun newExamsDiscovered(subject: Subject, newExamsCount: Int) {
+                showWatchdogNotification(context, subject, newExamsCount)
+            }
+        }
+
+        return when(ExamRepository.getInstance(context).checkExams(examDiscoveryListener)) {
             true -> Result.success()
             else -> Result.failure()
         }
     }
 }
 
-fun setupWorker(applicationContext: Context) {
+fun setupWatchdogWorker(applicationContext: Context) {
     val constraints = Constraints.Builder()
         .setRequiredNetworkType(NetworkType.CONNECTED)
         .setRequiresBatteryNotLow(true)
@@ -31,12 +38,15 @@ fun setupWorker(applicationContext: Context) {
         .build()
 
     WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
-        "watchdog",
+        WATCHDOG_WORKER_NAME,
         ExistingPeriodicWorkPolicy.KEEP,
         request
     )
 }
 
-fun stopWorker(applicationContext: Context) {
-    WorkManager.getInstance(applicationContext).cancelUniqueWork("watchdog")
+fun cancelWatchdogWorker(applicationContext: Context) {
+    WorkManager.getInstance(applicationContext).cancelUniqueWork(WATCHDOG_WORKER_NAME)
 }
+
+fun getWatchdogWorkerInfo(context: Context) =
+    WorkManager.getInstance(context).getWorkInfosForUniqueWorkLiveData(WATCHDOG_WORKER_NAME)

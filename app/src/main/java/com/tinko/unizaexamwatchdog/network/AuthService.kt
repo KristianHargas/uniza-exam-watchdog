@@ -9,8 +9,9 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.Header
 import retrofit2.http.POST
 
+const val HEADER_COOKIE_NAME = "Cookie"
 const val SESSION_COOKIE_NAME = "PHPSESSID"
-const val AUTH_SERVICE_URL = "https://vzdelavanie.uniza.sk/vzdelavanie/"
+private const val AUTH_SERVICE_URL = "https://vzdelavanie.uniza.sk/vzdelavanie/"
 
 data class AuthRes(val logged: Boolean)
 
@@ -27,13 +28,11 @@ interface AuthService {
     suspend fun refresh(
         @Field("meno") name: String,
         @Field("heslo") password: String,
-        @Header("Cookie") sessionCookie: String
+        @Header(HEADER_COOKIE_NAME) sessionCookie: String
     ): Response<AuthRes>
 }
 
 private val service: AuthService by lazy {
-    Log.i("AuthService", "creating auth service")
-
     val retrofit = Retrofit.Builder()
         .baseUrl(AUTH_SERVICE_URL)
         .addConverterFactory(GsonConverterFactory.create())

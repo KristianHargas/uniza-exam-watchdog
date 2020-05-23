@@ -1,6 +1,6 @@
 package com.tinko.unizaexamwatchdog.domain
 
-import com.tinko.unizaexamwatchdog.database.DatabaseExam
+import com.tinko.unizaexamwatchdog.database.entity.DatabaseExam
 import java.util.*
 
 data class Exam(

@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.tinko.unizaexamwatchdog.database.MyRoomDatabase
-import com.tinko.unizaexamwatchdog.database.SubjectDao
-import com.tinko.unizaexamwatchdog.database.asDomainModel
+import com.tinko.unizaexamwatchdog.database.dao.SubjectDao
+import com.tinko.unizaexamwatchdog.database.entity.asDomainModel
 import com.tinko.unizaexamwatchdog.domain.Subject
 import com.tinko.unizaexamwatchdog.domain.asDatabaseModel
 import com.tinko.unizaexamwatchdog.network.scrapeSubjects
@@ -22,24 +22,19 @@ class SubjectRepository private constructor(private val context: Context) {
         it.asDomainModel()
     }
 
-    suspend fun updateSubject(subject: Subject, watcherState: Boolean) = withContext(Dispatchers.IO) {
-        // only when there is a change update db
-        if (subject.watched != watcherState) {
-            subject.watched = watcherState
-            subjectDao.updateSubject(subject.asDatabaseModel())
-        }
+    suspend fun updateSubjectWatchState(subject: Subject, watchedState: Boolean) = withContext(Dispatchers.IO) {
+        subject.watched = watchedState
+        subjectDao.updateSubject(subject.asDatabaseModel())
     }
 
     suspend fun loadSubjects() = withContext(Dispatchers.IO) {
-        if (userRepository.authState.value == AuthenticationState.AUTHENTICATED) {
-            val subjectCount: Int = subjectDao.getSubjectCount()
-            // db is empty, lets scrape the web
-            if (subjectCount == 0) {
-                // refresh session in case it expired
-                if (userRepository.refreshSessionFromApp()) {
-                    val subjects: List<Subject> = scrapeSubjects(userRepository.getSessionCookie()!!)
-                    subjectDao.insertAll(subjects.asDatabaseModel())
-                }
+        val subjectCount: Int = subjectDao.getSubjectCount()
+        // db is empty, lets scrape the web
+        if (subjectCount == 0) {
+            // refresh session in case it expired
+            if (userRepository.refreshSessionFromApp()) {
+                val subjects: List<Subject> = scrapeSubjects(userRepository.getSessionCookie()!!)
+                subjectDao.insertAll(subjects.asDatabaseModel())
             }
         }
     }

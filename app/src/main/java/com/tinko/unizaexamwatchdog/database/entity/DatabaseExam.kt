@@ -1,8 +1,7 @@
-package com.tinko.unizaexamwatchdog.database
+package com.tinko.unizaexamwatchdog.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.tinko.unizaexamwatchdog.domain.Exam
 import java.util.*

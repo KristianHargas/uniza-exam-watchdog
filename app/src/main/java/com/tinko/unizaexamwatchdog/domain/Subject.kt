@@ -1,6 +1,6 @@
 package com.tinko.unizaexamwatchdog.domain
 
-import com.tinko.unizaexamwatchdog.database.DatabaseSubject
+import com.tinko.unizaexamwatchdog.database.entity.DatabaseSubject
 import java.util.*
 
 const val SUMMER_TERM_STRING = "summer"
@@ -22,12 +22,6 @@ data class Subject(
     var lastCheck: Date? = null
 )
 
-fun List<Subject>.asDatabaseModel(): List<DatabaseSubject> {
-    return map {
-        it.asDatabaseModel()
-    }
-}
-
 fun Subject.asDatabaseModel(): DatabaseSubject {
     return DatabaseSubject(
         id = this.id,
@@ -39,24 +33,14 @@ fun Subject.asDatabaseModel(): DatabaseSubject {
     )
 }
 
+fun List<Subject>.asDatabaseModel(): List<DatabaseSubject> {
+    return map {
+        it.asDatabaseModel()
+    }
+}
+
 fun List<Subject>.filter(term: Term): List<Subject> {
     return filter {
         it.term == term
     }
-}
-
-fun List<Subject>.hasSameSubjectsAs(subjects: List<Subject>): Boolean {
-    if (this.size == subjects.size) {
-        var match = true
-        this.forEachIndexed { index, subject ->
-            val otherSubject = subjects[index]
-            if (subject.id != otherSubject.id) {
-                match = false
-            }
-        }
-
-        return match
-    }
-
-    return false
 }
