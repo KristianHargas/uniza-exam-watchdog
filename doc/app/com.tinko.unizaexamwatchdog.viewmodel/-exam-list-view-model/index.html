@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ExamListViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.tinko.unizaexamwatchdog.viewmodel</a>&nbsp;/&nbsp;<a href="./index.html">ExamListViewModel</a><br/>
+<br/>
+<h1>ExamListViewModel</h1>
+<code><span class="keyword">class </span><span class="identifier">ExamListViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">AndroidViewModel</span></code>
+<p>This view model is used by <a href="#">ExamListFragment</a>.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-factory/index.html">Factory</a></h4>
+</td>
+<td>
+<p>Factory class to construct new <a href="../-main-view-model/index.html">MainViewModel</a>.</p>
+<code><span class="keyword">class </span><span class="identifier">Factory</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Factory</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Constructs a new view model.</p>
+<code><span class="identifier">ExamListViewModel</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.viewmodel.ExamListViewModel$<init>(android.app.Application)/application">application</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Application.html"><span class="identifier">Application</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="exams.html">exams</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">exams</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.tinko.unizaexamwatchdog.domain/-exam/index.html"><span class="identifier">Exam</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="load-exams.html">loadExams</a></h4>
+</td>
+<td>
+<p>This method loads all of the exams for given subject.</p>
+<code><span class="keyword">fun </span><span class="identifier">loadExams</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.viewmodel.ExamListViewModel$loadExams(kotlin.String)/subjectId">subjectId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Job</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

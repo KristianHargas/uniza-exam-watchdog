@@ -1,0 +1,35 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AuthService - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.tinko.unizaexamwatchdog.network</a>&nbsp;/&nbsp;<a href="./index.html">AuthService</a><br/>
+<br/>
+<h1>AuthService</h1>
+<code><span class="keyword">interface </span><span class="identifier">AuthService</span></code>
+<p>Interface implemented by Retrofit 2 which manages authentication tasks.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="login.html">login</a></h4>
+</td>
+<td>
+<p>Method used for authentication.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">login</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.network.AuthService$login(kotlin.String, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.network.AuthService$login(kotlin.String, kotlin.String)/password">password</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Response</span><span class="symbol">&lt;</span><a href="../-auth-res/index.html"><span class="identifier">AuthRes</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="refresh.html">refresh</a></h4>
+</td>
+<td>
+<p>Method used for refreshing expired session.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">refresh</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.network.AuthService$refresh(kotlin.String, kotlin.String, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.network.AuthService$refresh(kotlin.String, kotlin.String, kotlin.String)/password">password</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.network.AuthService$refresh(kotlin.String, kotlin.String, kotlin.String)/sessionCookie">sessionCookie</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Response</span><span class="symbol">&lt;</span><a href="../-auth-res/index.html"><span class="identifier">AuthRes</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

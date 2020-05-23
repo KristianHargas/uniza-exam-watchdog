@@ -1,0 +1,21 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ExamRepository.checkExams - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.tinko.unizaexamwatchdog.repository</a>&nbsp;/&nbsp;<a href="index.html">ExamRepository</a>&nbsp;/&nbsp;<a href="./check-exams.html">checkExams</a><br/>
+<br/>
+<h1>checkExams</h1>
+<a name="com.tinko.unizaexamwatchdog.repository.ExamRepository$checkExams(com.tinko.unizaexamwatchdog.repository.ExamDiscoveryListener)"></a>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">checkExams</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.repository.ExamRepository$checkExams(com.tinko.unizaexamwatchdog.repository.ExamDiscoveryListener)/listener">listener</span><span class="symbol">:</span>&nbsp;<a href="../-exam-discovery-listener/index.html"><span class="identifier">ExamDiscoveryListener</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>This method checks the web and local database for newly added exams for all watched subjects.</p>
+<p>Should be called from background service or work manager periodically.</p>
+<h3>Parameters</h3>
+<p><a name="listener"></a>
+<code>listener</code> - listener object to call when there are new exams found.</p>
+<p><strong>Return</strong><br/>
+true if the operation was successful, false otherwise.</p>
+</BODY>
+</HTML>

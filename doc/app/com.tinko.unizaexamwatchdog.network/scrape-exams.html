@@ -1,0 +1,23 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>scrapeExams - app</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">app</a>&nbsp;/&nbsp;<a href="index.html">com.tinko.unizaexamwatchdog.network</a>&nbsp;/&nbsp;<a href="./scrape-exams.html">scrapeExams</a><br/>
+<br/>
+<h1>scrapeExams</h1>
+<a name="com.tinko.unizaexamwatchdog.network$scrapeExams(com.tinko.unizaexamwatchdog.domain.Subject, kotlin.String)"></a>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">scrapeExams</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.network$scrapeExams(com.tinko.unizaexamwatchdog.domain.Subject, kotlin.String)/subject">subject</span><span class="symbol">:</span>&nbsp;<a href="../com.tinko.unizaexamwatchdog.domain/-subject/index.html"><span class="identifier">Subject</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.network$scrapeExams(com.tinko.unizaexamwatchdog.domain.Subject, kotlin.String)/sessionCookie">sessionCookie</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../com.tinko.unizaexamwatchdog.domain/-exam/index.html"><span class="identifier">Exam</span></a><span class="symbol">&gt;</span></code>
+<p>This function scrapes HTML document of the subject's exams returned from the server.</p>
+<p>Uses Jsoup library for scraping.</p>
+<h3>Parameters</h3>
+<p><a name="subject"></a>
+<code>subject</code> - exams of this subject will get scraped.</p>
+<p><a name="sessionCookie"></a>
+<code>sessionCookie</code> - active session cookie of the user used for authorisation.</p>
+<p><strong>Return</strong><br/>
+list of parsed subject's exams.</p>
+</BODY>
+</HTML>

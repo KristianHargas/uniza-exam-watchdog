@@ -1,0 +1,21 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:com.tinko.unizaexamwatchdog.database.entity$asDomainModel(kotlin.collections.List((com.tinko.unizaexamwatchdog.database.entity.DatabaseExam)))com.tinko.unizaexamwatchdog.database.entity/kotlin.collections.-list/as-domain-model.html
+$dokka.location:com.tinko.unizaexamwatchdog.database.entity$asDomainModel(kotlin.collections.List((com.tinko.unizaexamwatchdog.database.entity.DatabaseSubject)))com.tinko.unizaexamwatchdog.database.entity/kotlin.collections.-list/as-domain-model.html
+$dokka.location:com.tinko.unizaexamwatchdog.domain$asDatabaseModel(kotlin.collections.List((com.tinko.unizaexamwatchdog.domain.Exam)))com.tinko.unizaexamwatchdog.domain/kotlin.collections.-list/as-database-model.html
+$dokka.location:com.tinko.unizaexamwatchdog.domain$asDatabaseModel(kotlin.collections.List((com.tinko.unizaexamwatchdog.domain.Subject)))com.tinko.unizaexamwatchdog.domain/kotlin.collections.-list/as-database-model.html
+$dokka.location:com.tinko.unizaexamwatchdog.domain$filter(kotlin.collections.List((com.tinko.unizaexamwatchdog.domain.Subject)), com.tinko.unizaexamwatchdog.domain.Term)com.tinko.unizaexamwatchdog.domain/kotlin.collections.-list/filter.html
+com.tinko.unizaexamwatchdog.adapter
+com.tinko.unizaexamwatchdog.database
+com.tinko.unizaexamwatchdog.database.dao
+com.tinko.unizaexamwatchdog.database.entity
+com.tinko.unizaexamwatchdog.domain
+com.tinko.unizaexamwatchdog.network
+com.tinko.unizaexamwatchdog.preferences
+com.tinko.unizaexamwatchdog.repository
+com.tinko.unizaexamwatchdog.ui
+com.tinko.unizaexamwatchdog.ui.dialog
+com.tinko.unizaexamwatchdog.ui.fragment
+com.tinko.unizaexamwatchdog.util
+com.tinko.unizaexamwatchdog.viewmodel
+com.tinko.unizaexamwatchdog.work

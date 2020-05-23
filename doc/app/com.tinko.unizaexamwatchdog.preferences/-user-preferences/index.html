@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>UserPreferences - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.tinko.unizaexamwatchdog.preferences</a>&nbsp;/&nbsp;<a href="./index.html">UserPreferences</a><br/>
+<br/>
+<h1>UserPreferences</h1>
+<code><span class="keyword">class </span><span class="identifier">UserPreferences</span></code>
+<p>This class holds user data and stores them in encrypted form using <a href="#">EncryptedSharedPreferences</a>.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Constructs new preferences object.</p>
+<code><span class="identifier">UserPreferences</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.preferences.UserPreferences$<init>(android.content.Context)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="clear.html">clear</a></h4>
+</td>
+<td>
+<p>This method clears all data from preferences.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">clear</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-password.html">getPassword</a></h4>
+</td>
+<td>
+<p>Method used to get password of the logged user.</p>
+<code><span class="keyword">fun </span><span class="identifier">getPassword</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-session-cookie.html">getSessionCookie</a></h4>
+</td>
+<td>
+<p>Method used to get session identifier cookie of the logged user.</p>
+<code><span class="keyword">fun </span><span class="identifier">getSessionCookie</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-term.html">getTerm</a></h4>
+</td>
+<td>
+<p>Method used to get term selected by the logged user.</p>
+<code><span class="keyword">fun </span><span class="identifier">getTerm</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.tinko.unizaexamwatchdog.domain/-term/index.html"><span class="identifier">Term</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-username.html">getUsername</a></h4>
+</td>
+<td>
+<p>Method used to get username of the logged user.</p>
+<code><span class="keyword">fun </span><span class="identifier">getUsername</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="save-credentials.html">saveCredentials</a></h4>
+</td>
+<td>
+<p>This method saves user credentials.</p>
+<code><span class="keyword">fun </span><span class="identifier">saveCredentials</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.preferences.UserPreferences$saveCredentials(kotlin.String, kotlin.String, kotlin.String)/username">username</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.preferences.UserPreferences$saveCredentials(kotlin.String, kotlin.String, kotlin.String)/password">password</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.preferences.UserPreferences$saveCredentials(kotlin.String, kotlin.String, kotlin.String)/sessionId">sessionId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="save-selected-term.html">saveSelectedTerm</a></h4>
+</td>
+<td>
+<p>This method saves term (summer/winter) selected by the user.</p>
+<code><span class="keyword">fun </span><span class="identifier">saveSelectedTerm</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.preferences.UserPreferences$saveSelectedTerm(com.tinko.unizaexamwatchdog.domain.Term)/term">term</span><span class="symbol">:</span>&nbsp;<a href="../../com.tinko.unizaexamwatchdog.domain/-term/index.html"><span class="identifier">Term</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

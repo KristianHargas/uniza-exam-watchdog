@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.tinko.unizaexamwatchdog.network - app</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">app</a>&nbsp;/&nbsp;<a href="./index.html">com.tinko.unizaexamwatchdog.network</a><br/>
+<br/>
+<h2>Package com.tinko.unizaexamwatchdog.network</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-auth-res/index.html">AuthRes</a></h4>
+</td>
+<td>
+<p>Data class holding authentication response from the server.</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">AuthRes</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-auth-service/index.html">AuthService</a></h4>
+</td>
+<td>
+<p>Interface implemented by Retrofit 2 which manages authentication tasks.</p>
+<code><span class="keyword">interface </span><span class="identifier">AuthService</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-h-e-a-d-e-r_-c-o-o-k-i-e_-n-a-m-e.html">HEADER_COOKIE_NAME</a></h4>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">HEADER_COOKIE_NAME</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-s-e-s-s-i-o-n_-c-o-o-k-i-e_-n-a-m-e.html">SESSION_COOKIE_NAME</a></h4>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">SESSION_COOKIE_NAME</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="get-auth-service.html">getAuthService</a></h4>
+</td>
+<td>
+<p>Method used to get authentication service object.</p>
+<code><span class="keyword">fun </span><span class="identifier">getAuthService</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="-auth-service/index.html"><span class="identifier">AuthService</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="scrape-exams.html">scrapeExams</a></h4>
+</td>
+<td>
+<p>This function scrapes HTML document of the subject's exams returned from the server.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">scrapeExams</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.network$scrapeExams(com.tinko.unizaexamwatchdog.domain.Subject, kotlin.String)/subject">subject</span><span class="symbol">:</span>&nbsp;<a href="../com.tinko.unizaexamwatchdog.domain/-subject/index.html"><span class="identifier">Subject</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.network$scrapeExams(com.tinko.unizaexamwatchdog.domain.Subject, kotlin.String)/sessionCookie">sessionCookie</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../com.tinko.unizaexamwatchdog.domain/-exam/index.html"><span class="identifier">Exam</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="scrape-subjects.html">scrapeSubjects</a></h4>
+</td>
+<td>
+<p>This function scrapes HTML document of the user's subjects returned from the server.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">scrapeSubjects</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.network$scrapeSubjects(kotlin.String)/sessionCookie">sessionCookie</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../com.tinko.unizaexamwatchdog.domain/-subject/index.html"><span class="identifier">Subject</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

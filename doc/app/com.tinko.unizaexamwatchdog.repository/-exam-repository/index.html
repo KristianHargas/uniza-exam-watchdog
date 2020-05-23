@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ExamRepository - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.tinko.unizaexamwatchdog.repository</a>&nbsp;/&nbsp;<a href="./index.html">ExamRepository</a><br/>
+<br/>
+<h1>ExamRepository</h1>
+<code><span class="keyword">class </span><span class="identifier">ExamRepository</span></code>
+<p>Repository class which manages all data and actions regarding exams.</p>
+<p>Creates a layer of abstraction for view model objects.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-companion.html">Companion</a></h4>
+</td>
+<td>
+<code><span class="keyword">companion</span> <span class="keyword">object </span><span class="identifier">Companion</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.tinko.unizaexamwatchdog.util/-singleton-holder/index.html"><span class="identifier">SingletonHolder</span></a><span class="symbol">&lt;</span><a href="./index.html"><span class="identifier">ExamRepository</span></a><span class="symbol">,</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="check-exams.html">checkExams</a></h4>
+</td>
+<td>
+<p>This method checks the web and local database for newly added exams for all watched subjects.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">checkExams</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.repository.ExamRepository$checkExams(com.tinko.unizaexamwatchdog.repository.ExamDiscoveryListener)/listener">listener</span><span class="symbol">:</span>&nbsp;<a href="../-exam-discovery-listener/index.html"><span class="identifier">ExamDiscoveryListener</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="delete-all-exams.html">deleteAllExams</a></h4>
+</td>
+<td>
+<p>This method deletes all exams from local database.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">deleteAllExams</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-exams-for-subject.html">getExamsForSubject</a></h4>
+</td>
+<td>
+<p>This method is used to get all exams found so far for given subject.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">getExamsForSubject</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.repository.ExamRepository$getExamsForSubject(kotlin.String)/subjectId">subjectId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.tinko.unizaexamwatchdog.domain/-exam/index.html"><span class="identifier">Exam</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

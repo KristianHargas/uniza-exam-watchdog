@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Subject - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.tinko.unizaexamwatchdog.domain</a>&nbsp;/&nbsp;<a href="./index.html">Subject</a><br/>
+<br/>
+<h1>Subject</h1>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Subject</span></code>
+<p>Domain model which holds subject data.</p>
+<p>This object is used within the application to store data about subject.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Domain model which holds subject data.</p>
+<code><span class="identifier">Subject</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.domain.Subject$<init>(kotlin.String, kotlin.String, com.tinko.unizaexamwatchdog.domain.Term, kotlin.String, kotlin.Boolean, java.util.Date)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.domain.Subject$<init>(kotlin.String, kotlin.String, com.tinko.unizaexamwatchdog.domain.Term, kotlin.String, kotlin.Boolean, java.util.Date)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.domain.Subject$<init>(kotlin.String, kotlin.String, com.tinko.unizaexamwatchdog.domain.Term, kotlin.String, kotlin.Boolean, java.util.Date)/term">term</span><span class="symbol">:</span>&nbsp;<a href="../-term/index.html"><span class="identifier">Term</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.domain.Subject$<init>(kotlin.String, kotlin.String, com.tinko.unizaexamwatchdog.domain.Term, kotlin.String, kotlin.Boolean, java.util.Date)/examsUrl">examsUrl</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.domain.Subject$<init>(kotlin.String, kotlin.String, com.tinko.unizaexamwatchdog.domain.Term, kotlin.String, kotlin.Boolean, java.util.Date)/watched">watched</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.domain.Subject$<init>(kotlin.String, kotlin.String, com.tinko.unizaexamwatchdog.domain.Term, kotlin.String, kotlin.Boolean, java.util.Date)/lastCheck">lastCheck</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/util/Date.html"><span class="identifier">Date</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="exams-url.html">examsUrl</a></h4>
+</td>
+<td>
+<p>url to get exams of this subject from.</p>
+<code><span class="keyword">val </span><span class="identifier">examsUrl</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="id.html">id</a></h4>
+</td>
+<td>
+<p>id of the subject.</p>
+<code><span class="keyword">val </span><span class="identifier">id</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="last-check.html">lastCheck</a></h4>
+</td>
+<td>
+<p>timestamp of last exam check of this subject.</p>
+<code><span class="keyword">var </span><span class="identifier">lastCheck</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/util/Date.html"><span class="identifier">Date</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="name.html">name</a></h4>
+</td>
+<td>
+<p>name of the subject.</p>
+<code><span class="keyword">val </span><span class="identifier">name</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="term.html">term</a></h4>
+</td>
+<td>
+<p>term of this subject (winter/summer).</p>
+<code><span class="keyword">val </span><span class="identifier">term</span><span class="symbol">: </span><a href="../-term/index.html"><span class="identifier">Term</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="watched.html">watched</a></h4>
+</td>
+<td>
+<p>indicator whether this subject should be watched by the watchdog or not.</p>
+<code><span class="keyword">var </span><span class="identifier">watched</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="../as-database-model.html">asDatabaseModel</a></h4>
+</td>
+<td>
+<p>Extension method which converts <a href="./index.html">Subject</a> to database entity used by the database - <a href="../../com.tinko.unizaexamwatchdog.database.entity/-database-subject/index.html">DatabaseSubject</a>.</p>
+<code><span class="keyword">fun </span><a href="./index.html"><span class="identifier">Subject</span></a><span class="symbol">.</span><span class="identifier">asDatabaseModel</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.tinko.unizaexamwatchdog.database.entity/-database-subject/index.html"><span class="identifier">DatabaseSubject</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

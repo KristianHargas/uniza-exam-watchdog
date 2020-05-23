@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MyRoomDatabase - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.tinko.unizaexamwatchdog.database</a>&nbsp;/&nbsp;<a href="./index.html">MyRoomDatabase</a><br/>
+<br/>
+<h1>MyRoomDatabase</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">MyRoomDatabase</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">RoomDatabase</span></code>
+<p>Singleton used for getting reference to Room database instance.</p>
+<p>Provides access to all DAOs (Database Access Objects) of the application.</p>
+<p>Inspiration: https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin/#6.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Singleton used for getting reference to Room database instance.</p>
+<code><span class="identifier">MyRoomDatabase</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="exam-dao.html">examDao</a></h4>
+</td>
+<td>
+<p>Database access object for exams.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">examDao</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.tinko.unizaexamwatchdog.database.dao/-exam-dao/index.html"><span class="identifier">ExamDao</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="subject-dao.html">subjectDao</a></h4>
+</td>
+<td>
+<p>Database access object for subjects.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">subjectDao</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.tinko.unizaexamwatchdog.database.dao/-subject-dao/index.html"><span class="identifier">SubjectDao</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="get-database.html">getDatabase</a></h4>
+</td>
+<td>
+<p>Static factory method for obtaining database instance.</p>
+<code><span class="keyword">fun </span><span class="identifier">getDatabase</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.database.MyRoomDatabase.Companion$getDatabase(android.content.Context)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">MyRoomDatabase</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

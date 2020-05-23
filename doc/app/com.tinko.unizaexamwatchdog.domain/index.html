@@ -1,0 +1,89 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.tinko.unizaexamwatchdog.domain - app</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">app</a>&nbsp;/&nbsp;<a href="./index.html">com.tinko.unizaexamwatchdog.domain</a><br/>
+<br/>
+<h2>Package com.tinko.unizaexamwatchdog.domain</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-exam/index.html">Exam</a></h4>
+</td>
+<td>
+<p>Domain model which holds exam data.</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Exam</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-subject/index.html">Subject</a></h4>
+</td>
+<td>
+<p>Domain model which holds subject data.</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Subject</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-term/index.html">Term</a></h4>
+</td>
+<td>
+<p>Enum holding information regarding the term of the subject (summer/winter).</p>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">Term</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extensions for External Classes</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="kotlin.collections.-list/index.html">kotlin.collections.List</a></h4>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-s-u-m-m-e-r_-t-e-r-m_-s-t-r-i-n-g.html">SUMMER_TERM_STRING</a></h4>
+</td>
+<td>
+<p><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> representation of <a href="-term/-s-u-m-m-e-r.html">Term.SUMMER</a> used by the database and preferences.</p>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">SUMMER_TERM_STRING</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-w-i-n-t-e-r_-t-e-r-m_-s-t-r-i-n-g.html">WINTER_TERM_STRING</a></h4>
+</td>
+<td>
+<p><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> representation of <a href="-term/-w-i-n-t-e-r.html">Term.WINTER</a> used by the database and preferences.</p>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">WINTER_TERM_STRING</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="as-database-model.html">asDatabaseModel</a></h4>
+</td>
+<td>
+<p>Extension method which converts <a href="-exam/index.html">Exam</a> to database entity used by the database - <a href="../com.tinko.unizaexamwatchdog.database.entity/-database-exam/index.html">DatabaseExam</a>.</p>
+<code><span class="keyword">fun </span><a href="-exam/index.html"><span class="identifier">Exam</span></a><span class="symbol">.</span><span class="identifier">asDatabaseModel</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../com.tinko.unizaexamwatchdog.database.entity/-database-exam/index.html"><span class="identifier">DatabaseExam</span></a></code>
+<p>Extension method which converts <a href="-subject/index.html">Subject</a> to database entity used by the database - <a href="../com.tinko.unizaexamwatchdog.database.entity/-database-subject/index.html">DatabaseSubject</a>.</p>
+<code><span class="keyword">fun </span><a href="-subject/index.html"><span class="identifier">Subject</span></a><span class="symbol">.</span><span class="identifier">asDatabaseModel</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../com.tinko.unizaexamwatchdog.database.entity/-database-subject/index.html"><span class="identifier">DatabaseSubject</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

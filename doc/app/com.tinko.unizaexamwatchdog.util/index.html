@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.tinko.unizaexamwatchdog.util - app</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">app</a>&nbsp;/&nbsp;<a href="./index.html">com.tinko.unizaexamwatchdog.util</a><br/>
+<br/>
+<h2>Package com.tinko.unizaexamwatchdog.util</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-singleton-holder/index.html">SingletonHolder</a></h4>
+</td>
+<td>
+<p>Parent class for all singletons which accept one argument.</p>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">SingletonHolder</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">, </span><span class="keyword">in</span>&nbsp;<span class="identifier">A</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="create-watchdog-notification-channel.html">createWatchdogNotificationChannel</a></h4>
+</td>
+<td>
+<p>This method is used to create notification channel to broadcast watchdog notifications.</p>
+<code><span class="keyword">fun </span><span class="identifier">createWatchdogNotificationChannel</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.util$createWatchdogNotificationChannel(android.content.Context)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="format-date.html">formatDate</a></h4>
+</td>
+<td>
+<p>Binding adapter which sets parsed date as content of <a href="https://developer.android.com/reference/android/widget/TextView.html">TextView</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">formatDate</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.util$formatDate(android.widget.TextView, java.util.Date)/view">view</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/widget/TextView.html"><span class="identifier">TextView</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.util$formatDate(android.widget.TextView, java.util.Date)/date">date</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/util/Date.html"><span class="identifier">Date</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="gone-if-null.html">goneIfNull</a></h4>
+</td>
+<td>
+<p>Binding adapter which hides view if provided argument is null.</p>
+<code><span class="keyword">fun </span><span class="identifier">goneIfNull</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.util$goneIfNull(android.view.View, kotlin.Any)/view">view</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.util$goneIfNull(android.view.View, kotlin.Any)/obj">obj</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="show-watchdog-notification.html">showWatchdogNotification</a></h4>
+</td>
+<td>
+<p>This method is used to show watchdog notification when there are new detected exams for given subject.</p>
+<code><span class="keyword">fun </span><span class="identifier">showWatchdogNotification</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.util$showWatchdogNotification(android.content.Context, com.tinko.unizaexamwatchdog.domain.Subject, kotlin.Int)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.util$showWatchdogNotification(android.content.Context, com.tinko.unizaexamwatchdog.domain.Subject, kotlin.Int)/subject">subject</span><span class="symbol">:</span>&nbsp;<a href="../com.tinko.unizaexamwatchdog.domain/-subject/index.html"><span class="identifier">Subject</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.util$showWatchdogNotification(android.content.Context, com.tinko.unizaexamwatchdog.domain.Subject, kotlin.Int)/newExamsCount">newExamsCount</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

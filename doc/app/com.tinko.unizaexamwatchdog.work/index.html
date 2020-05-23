@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.tinko.unizaexamwatchdog.work - app</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">app</a>&nbsp;/&nbsp;<a href="./index.html">com.tinko.unizaexamwatchdog.work</a><br/>
+<br/>
+<h2>Package com.tinko.unizaexamwatchdog.work</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-watchdog-worker/index.html">WatchdogWorker</a></h4>
+</td>
+<td>
+<p>Periodic unique work manager which checks for newly added exams for every watched subject.</p>
+<code><span class="keyword">class </span><span class="identifier">WatchdogWorker</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">CoroutineWorker</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="cancel-watchdog-worker.html">cancelWatchdogWorker</a></h4>
+</td>
+<td>
+<p>This method is used for canceling enqueued watchdog work manager.</p>
+<code><span class="keyword">fun </span><span class="identifier">cancelWatchdogWorker</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.work$cancelWatchdogWorker(android.content.Context)/applicationContext">applicationContext</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-watchdog-worker-info.html">getWatchdogWorkerInfo</a></h4>
+</td>
+<td>
+<p>This method is used for getting information about running watchdog work manager.</p>
+<code><span class="keyword">fun </span><span class="identifier">getWatchdogWorkerInfo</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.work$getWatchdogWorkerInfo(android.content.Context)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html"><span class="identifier">MutableList</span></a><span class="symbol">&lt;</span><span class="identifier">WorkInfo</span><span class="symbol">!</span><span class="symbol">&gt;</span><span class="symbol">!</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="setup-watchdog-worker.html">setupWatchdogWorker</a></h4>
+</td>
+<td>
+<p>This function starts watchdog work manager.</p>
+<code><span class="keyword">fun </span><span class="identifier">setupWatchdogWorker</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.work$setupWatchdogWorker(android.content.Context)/applicationContext">applicationContext</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

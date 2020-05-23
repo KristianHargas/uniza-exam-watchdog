@@ -1,0 +1,126 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MainViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.tinko.unizaexamwatchdog.viewmodel</a>&nbsp;/&nbsp;<a href="./index.html">MainViewModel</a><br/>
+<br/>
+<h1>MainViewModel</h1>
+<code><span class="keyword">class </span><span class="identifier">MainViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">AndroidViewModel</span></code>
+<p>This view model is used by <a href="#">MainScreenFragment</a>.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-factory/index.html">Factory</a></h4>
+</td>
+<td>
+<p>Factory class to construct new <a href="./index.html">MainViewModel</a>.</p>
+<code><span class="keyword">class </span><span class="identifier">Factory</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Factory</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Constructs a new view model.</p>
+<code><span class="identifier">MainViewModel</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.viewmodel.MainViewModel$<init>(android.app.Application)/application">application</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Application.html"><span class="identifier">Application</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="all-subjects.html">allSubjects</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">allSubjects</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.tinko.unizaexamwatchdog.domain/-subject/index.html"><span class="identifier">Subject</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="term.html">term</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">term</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="../../com.tinko.unizaexamwatchdog.domain/-term/index.html"><span class="identifier">Term</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="user-authenticated.html">userAuthenticated</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">userAuthenticated</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="worker-running.html">workerRunning</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">workerRunning</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="cancel-worker.html">cancelWorker</a></h4>
+</td>
+<td>
+<p>This method cancels watchdog work manager.</p>
+<code><span class="keyword">fun </span><span class="identifier">cancelWorker</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="load-subjects.html">loadSubjects</a></h4>
+</td>
+<td>
+<p>This method loads user's subjects.</p>
+<code><span class="keyword">fun </span><span class="identifier">loadSubjects</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Job</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="logout.html">logout</a></h4>
+</td>
+<td>
+<p>This method logs out the user.</p>
+<code><span class="keyword">fun </span><span class="identifier">logout</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Job</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="start-worker.html">startWorker</a></h4>
+</td>
+<td>
+<p>This method starts watchdog work manager.</p>
+<code><span class="keyword">fun </span><span class="identifier">startWorker</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="term-changed.html">termChanged</a></h4>
+</td>
+<td>
+<p>This method is called when user selectes new term (winter/summer).</p>
+<code><span class="keyword">fun </span><span class="identifier">termChanged</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.viewmodel.MainViewModel$termChanged(com.tinko.unizaexamwatchdog.domain.Term)/term">term</span><span class="symbol">:</span>&nbsp;<a href="../../com.tinko.unizaexamwatchdog.domain/-term/index.html"><span class="identifier">Term</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="update-subject-watch-state.html">updateSubjectWatchState</a></h4>
+</td>
+<td>
+<p>This method is used to update subject's watch state.</p>
+<code><span class="keyword">fun </span><span class="identifier">updateSubjectWatchState</span><span class="symbol">(</span><span class="identifier" id="com.tinko.unizaexamwatchdog.viewmodel.MainViewModel$updateSubjectWatchState(com.tinko.unizaexamwatchdog.domain.Subject, kotlin.Boolean)/subject">subject</span><span class="symbol">:</span>&nbsp;<a href="../../com.tinko.unizaexamwatchdog.domain/-subject/index.html"><span class="identifier">Subject</span></a><span class="symbol">, </span><span class="identifier" id="com.tinko.unizaexamwatchdog.viewmodel.MainViewModel$updateSubjectWatchState(com.tinko.unizaexamwatchdog.domain.Subject, kotlin.Boolean)/watcherState">watcherState</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Job</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
