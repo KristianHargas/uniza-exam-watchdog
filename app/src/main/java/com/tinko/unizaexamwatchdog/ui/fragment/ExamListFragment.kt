@@ -36,17 +36,14 @@ class ExamListFragment : Fragment() {
     private lateinit var binding: FragmentExamListBinding
     private lateinit var adapter: ExamListAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        // set the toolbar title
-        (activity as MainActivity).supportActionBar?.title = args.subjectName
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // set the toolbar title
+        (activity as MainActivity).supportActionBar?.title = args.subjectName
+
         // inflate the binding
         val binding = FragmentExamListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner

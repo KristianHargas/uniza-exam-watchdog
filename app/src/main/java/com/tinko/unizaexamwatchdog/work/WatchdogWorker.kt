@@ -41,7 +41,7 @@ class WatchdogWorker(private val context: Context, params: WorkerParameters) :
 /**
  * This function starts watchdog work manager.
  *
- * Work manager is firstly executed after 30 seconds after startup and then periodically every 15 minutes.
+ * Work manager is firstly executed after 20 seconds after startup and then periodically every 15 minutes.
  *
  * @param applicationContext application context
  */
@@ -49,12 +49,12 @@ fun setupWatchdogWorker(applicationContext: Context) {
     // work manager is executed only when all of the following conditions are met.
     val constraints = Constraints.Builder()
         .setRequiredNetworkType(NetworkType.CONNECTED)
-        .setRequiresBatteryNotLow(true)
+        .setRequiresBatteryNotLow(false)
         .build()
 
     // configuring timing
     val request = PeriodicWorkRequestBuilder<WatchdogWorker>(15, TimeUnit.MINUTES)
-        .setInitialDelay(30, TimeUnit.SECONDS)
+        .setInitialDelay(20, TimeUnit.SECONDS)
         .setConstraints(constraints)
         .build()
 
